@@ -6,8 +6,7 @@
 
 package com.byteflair.resthooks.api;
 
-import com.byteflair.resthooks.api.boundary.EventPostForm;
-import com.byteflair.resthooks.api.boundary.EventPutForm;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,26 +25,11 @@ public interface EventSpi {
     @RequestMapping(method=RequestMethod.GET)
     public
     @ResponseBody
-    List<Event> getResourceCollection();
+    ResponseEntity<List<Event>> getResourceCollection();
 
     @RequestMapping(value="/{id}", method=RequestMethod.GET)
     public
     @ResponseBody
-    Event getResource(@PathVariable("id") String id);
-
-    @RequestMapping(method=RequestMethod.POST)
-    public
-    @ResponseBody
-    List<Event> createResource(EventPostForm form);
-
-    @RequestMapping(value="/{id}", method=RequestMethod.PUT)
-    public
-    @ResponseBody
-    List<Event> updateResource(@PathVariable("id") String id, EventPutForm form);
-
-    @RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-    public
-    @ResponseBody
-    List<Event> deleteResource(@PathVariable("id") String id);
+    ResponseEntity<Event> getResource(@PathVariable("id") String id);
 
 }

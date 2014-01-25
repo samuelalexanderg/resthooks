@@ -8,6 +8,7 @@ package com.byteflair.resthooks.api;
 
 import com.byteflair.resthooks.api.boundary.SubscriptionPostForm;
 import com.byteflair.resthooks.api.boundary.SubscriptionPutForm;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,26 +27,26 @@ public interface SubscriptionSpi {
     @RequestMapping(method=RequestMethod.GET)
     public
     @ResponseBody
-    List<Subscription> getResourceCollection();
+    ResponseEntity<List<Subscription>> getResourceCollection();
 
     @RequestMapping(value="/{id}", method=RequestMethod.GET)
     public
     @ResponseBody
-    Subscription getResource(@PathVariable("id") String id);
+    ResponseEntity<Subscription> getResource(@PathVariable("id") String id);
 
     @RequestMapping(method=RequestMethod.POST)
     public
     @ResponseBody
-    List<Subscription> createResource(SubscriptionPostForm form);
+    ResponseEntity<List<Subscription>> createResource(SubscriptionPostForm form);
 
     @RequestMapping(value="/{id}", method=RequestMethod.PUT)
     public
     @ResponseBody
-    List<Subscription> updateResource(@PathVariable("id") String id, SubscriptionPutForm form);
+    ResponseEntity<List<Subscription>> updateResource(@PathVariable("id") String id, SubscriptionPutForm form);
 
     @RequestMapping(value="/{id}", method=RequestMethod.DELETE)
     public
     @ResponseBody
-    List<Subscription> deleteResource(@PathVariable("id") String id);
+    ResponseEntity<List<Subscription>> deleteResource(@PathVariable("id") String id);
 
 }
