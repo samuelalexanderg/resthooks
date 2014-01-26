@@ -2,6 +2,7 @@ package com.byteflair.resthooks.api.impl;
 
 import com.byteflair.resthooks.api.Log;
 import com.byteflair.resthooks.api.LogSpi;
+import com.byteflair.resthooks.api.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +30,11 @@ public class LogController implements LogSpi {
     }
 
     @Override
-    public ResponseEntity<Log> getResource(@PathVariable("id") String id) {
-        return null;
+    public ResponseEntity<Log> getResource(@PathVariable("id") String id) throws NotFoundException {
+        Log log=logService.get(id);
+        if(log == null) {
+            throw new NotFoundException("Entity not found");
+        }
+        return new ResponseEntity<Log>(log, HttpStatus.OK);
     }
 }

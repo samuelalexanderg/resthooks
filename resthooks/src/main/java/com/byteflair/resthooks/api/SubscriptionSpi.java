@@ -8,6 +8,7 @@ package com.byteflair.resthooks.api;
 
 import com.byteflair.resthooks.api.boundary.SubscriptionPostForm;
 import com.byteflair.resthooks.api.boundary.SubscriptionPutForm;
+import com.byteflair.resthooks.api.exceptions.NotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,7 +43,7 @@ public interface SubscriptionSpi {
     @RequestMapping(value="/{id}", method=RequestMethod.PUT)
     public
     @ResponseBody
-    ResponseEntity<Subscription> updateResource(@PathVariable("id") String id, SubscriptionPutForm form);
+    ResponseEntity<Subscription> updateResource(@PathVariable("id") String id, SubscriptionPutForm form) throws NotFoundException;
 
     @RequestMapping(value="/{id}", method=RequestMethod.DELETE)
     public

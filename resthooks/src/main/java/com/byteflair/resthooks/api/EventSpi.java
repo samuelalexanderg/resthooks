@@ -6,6 +6,7 @@
 
 package com.byteflair.resthooks.api;
 
+import com.byteflair.resthooks.api.exceptions.NotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +31,6 @@ public interface EventSpi {
     @RequestMapping(value="/{id}", method=RequestMethod.GET)
     public
     @ResponseBody
-    ResponseEntity<Event> getResource(@PathVariable("id") String id);
+    ResponseEntity<Event> getResource(@PathVariable("id") String id) throws NotFoundException;
 
 }

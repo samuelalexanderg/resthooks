@@ -1,5 +1,6 @@
 package com.byteflair.resthooks.db.mongo;
 
+import com.byteflair.resthooks.api.impl.LogRepository;
 import org.springframework.data.repository.CrudRepository;
 
 /**

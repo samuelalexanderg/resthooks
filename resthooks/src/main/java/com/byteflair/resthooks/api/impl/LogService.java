@@ -19,4 +19,8 @@ public class LogService {
     public Collection<? extends Log> getAll() {
         return logRepository.findAll();
     }
+
+    public Log get(Object id) {
+        return logRepository.findOne(id);
+    }
 }

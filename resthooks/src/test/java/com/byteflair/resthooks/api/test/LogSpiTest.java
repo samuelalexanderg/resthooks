@@ -2,6 +2,8 @@ package com.byteflair.resthooks.api.test;
 
 import com.byteflair.resthooks.api.Log;
 import com.byteflair.resthooks.api.LogLevel;
+import com.byteflair.resthooks.api.exceptions.NotFoundException;
+import com.byteflair.resthooks.api.exceptions.RestApiException;
 import com.byteflair.resthooks.api.impl.LogImpl;
 import com.byteflair.resthooks.api.impl.LogRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -11,6 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -60,7 +63,7 @@ public class LogSpiTest {
     }
 
     @Test
-    public void getLogEntries() throws Exception {
+    public void thatCanGetAllLogEntries() throws Exception {
         ResultActions result=this.mockMvc.perform(get("/logs").accept(new MediaType("application", "json")));
         result.andExpect(status().isOk())
               .andExpect(content().contentType("application/json"));
@@ -77,4 +80,32 @@ public class LogSpiTest {
         }
     }
 
+    @Test
+    public void thatCanGetSingleLogEntry() throws Exception {
+        String id=(String) logRepository.findAll().get(0).getId();
+        ResultActions result=this.mockMvc.perform(get("/logs/"+id).accept(new MediaType("application", "json")));
+        result.andExpect(status().isOk())
+              .andExpect(content().contentType("application/json"));
+        String json=result.andReturn().getResponse().getContentAsString();
+        ObjectMapper mapper=new ObjectMapper();
+        Log log=mapper.readValue(json, LogImpl.class);
+        Log other=logRepository.findOne(id);
+        assertEquals(log.getId(), other.getId());
+        assertEquals(log.getLevel(), other.getLevel());
+        assertEquals(log.getMessage(), other.getMessage());
+        assertTrue(log.getCreatedAt().isEqual(other.getCreatedAt()));
+    }
+
+    @Test
+    public void thatThrowsNotFoundException() throws Exception {
+        String id=(String) logRepository.findAll().get(0).getId();
+        logRepository.delete(id);
+        ResultActions result=this.mockMvc.perform(get("/logs/"+id).accept(new MediaType("application", "json")));
+        result.andExpect(status().isNotFound())
+              .andExpect(content().contentType("application/json"));
+        String json=result.andReturn().getResponse().getContentAsString();
+        ObjectMapper mapper=new ObjectMapper();
+        RestApiException exception=mapper.readValue(json, NotFoundException.class);
+        assertEquals(exception.getStatus(), HttpStatus.NOT_FOUND);
+    }
 }

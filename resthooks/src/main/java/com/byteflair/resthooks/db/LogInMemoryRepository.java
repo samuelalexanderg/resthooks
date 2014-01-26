@@ -16,6 +16,11 @@ public class LogInMemoryRepository implements LogRepository {
     private Map<Object, Log> logStore=new HashMap<>();
 
     @Override
+    public void deleteAll() {
+        logStore.clear();
+    }
+
+    @Override
     public void delete(Object id) {
         logStore.remove(id);
     }

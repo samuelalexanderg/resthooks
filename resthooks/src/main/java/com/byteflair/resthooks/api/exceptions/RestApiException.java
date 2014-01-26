@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 
-@JsonIgnoreProperties(value={ "cause", "stackTrace", "localizedMessage", "suppressed" })
+@JsonIgnoreProperties(value={ "cause", "stackTrace", "localizedMessage", "suppressed" }, ignoreUnknown=true)
 public class RestApiException extends Exception {
 
     private static final long serialVersionUID=5726439321553988580L;

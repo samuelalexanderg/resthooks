@@ -9,6 +9,8 @@ import java.util.List;
  */
 public interface LogRepository {
 
+    public void deleteAll();
+
     public void delete(Object id);
 
     public List<Log> findAll();

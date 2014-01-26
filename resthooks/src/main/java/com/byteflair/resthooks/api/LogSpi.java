@@ -1,5 +1,6 @@
 package com.byteflair.resthooks.api;
 
+import com.byteflair.resthooks.api.exceptions.NotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,6 +30,6 @@ public interface LogSpi {
     @RequestMapping(value="/{id}", method=RequestMethod.GET, headers="Accept=application/json", produces="application/json")
     public
     @ResponseBody
-    ResponseEntity<Log> getResource(@PathVariable("id") String id);
+    ResponseEntity<Log> getResource(@PathVariable("id") String id) throws NotFoundException;
 
 }
