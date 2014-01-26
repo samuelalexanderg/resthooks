@@ -1,4 +1,4 @@
-package com.byteflair.resthooks.services;
+package com.byteflair.resthooks.api.impl;
 
 import com.byteflair.resthooks.api.Log;
 import org.springframework.beans.factory.annotation.Autowired;

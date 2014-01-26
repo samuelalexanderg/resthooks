@@ -1,5 +1,7 @@
-package com.byteflair.resthooks.api;
+package com.byteflair.resthooks.api.impl;
 
+import com.byteflair.resthooks.api.Event;
+import com.byteflair.resthooks.api.EventStatus;
 import org.joda.time.DateTime;
 
 /**

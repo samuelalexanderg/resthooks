@@ -1,7 +1,7 @@
 package com.byteflair.resthooks.db;
 
 import com.byteflair.resthooks.api.Log;
-import com.byteflair.resthooks.services.LogRepository;
+import com.byteflair.resthooks.api.impl.LogRepository;
 
 import java.util.ArrayList;
 import java.util.HashMap;

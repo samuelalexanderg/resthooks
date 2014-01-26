@@ -1,4 +1,4 @@
-package com.byteflair.resthooks.api.boundary;
+package com.byteflair.resthooks.api.impl;
 
 import com.byteflair.resthooks.api.Event;
 import com.byteflair.resthooks.api.EventSpi;

@@ -1,5 +1,7 @@
-package com.byteflair.resthooks.api;
+package com.byteflair.resthooks.api.impl;
 
+import com.byteflair.resthooks.api.Log;
+import com.byteflair.resthooks.api.LogLevel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormatter;

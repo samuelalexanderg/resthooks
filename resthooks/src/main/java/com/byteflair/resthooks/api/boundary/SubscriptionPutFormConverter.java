@@ -1,7 +1,7 @@
 package com.byteflair.resthooks.api.boundary;
 
 import com.byteflair.resthooks.api.Subscription;
-import com.byteflair.resthooks.api.SubscriptionImpl;
+import com.byteflair.resthooks.api.impl.SubscriptionImpl;
 import org.springframework.beans.BeanUtils;
 import org.springframework.core.convert.converter.Converter;
 

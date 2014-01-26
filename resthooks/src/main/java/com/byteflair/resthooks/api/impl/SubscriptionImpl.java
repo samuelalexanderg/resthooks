@@ -1,5 +1,6 @@
-package com.byteflair.resthooks.api;
+package com.byteflair.resthooks.api.impl;
 
+import com.byteflair.resthooks.api.Subscription;
 import org.joda.time.DateTime;
 
 import java.net.URL;

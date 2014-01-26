@@ -1,4 +1,4 @@
-package com.byteflair.resthooks.services;
+package com.byteflair.resthooks.api.impl;
 
 import org.springframework.stereotype.Service;
 

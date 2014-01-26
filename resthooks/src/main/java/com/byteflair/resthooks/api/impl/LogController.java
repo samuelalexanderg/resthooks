@@ -1,8 +1,7 @@
-package com.byteflair.resthooks.api.boundary;
+package com.byteflair.resthooks.api.impl;
 
 import com.byteflair.resthooks.api.Log;
 import com.byteflair.resthooks.api.LogSpi;
-import com.byteflair.resthooks.services.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

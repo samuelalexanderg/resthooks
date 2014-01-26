@@ -1,9 +1,9 @@
 package com.byteflair.resthooks.api.test;
 
 import com.byteflair.resthooks.api.Log;
-import com.byteflair.resthooks.api.LogImpl;
 import com.byteflair.resthooks.api.LogLevel;
-import com.byteflair.resthooks.services.LogRepository;
+import com.byteflair.resthooks.api.impl.LogImpl;
+import com.byteflair.resthooks.api.impl.LogRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.joda.time.DateTime;
