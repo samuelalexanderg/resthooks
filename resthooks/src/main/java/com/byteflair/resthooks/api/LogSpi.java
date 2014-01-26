@@ -21,12 +21,12 @@ public interface LogSpi {
      *
      * @return
      */
-    @RequestMapping(method=RequestMethod.GET)
+    @RequestMapping(method=RequestMethod.GET, headers="Accept=application/json", produces="application/json")
     public
     @ResponseBody
     ResponseEntity<List<Log>> getResourceCollection();
 
-    @RequestMapping(value="/{id}", method=RequestMethod.GET)
+    @RequestMapping(value="/{id}", method=RequestMethod.GET, headers="Accept=application/json", produces="application/json")
     public
     @ResponseBody
     ResponseEntity<Log> getResource(@PathVariable("id") String id);

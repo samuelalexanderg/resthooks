@@ -4,14 +4,12 @@
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GPLv3 for more details.
  ******************************************************************************/
 
-package com.byteflair.resthooks.domain.mongo;
+package com.byteflair.resthooks.db.mongo;
 
-import com.byteflair.resthooks.domain.SubscriptionImpl;
-import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.repository.CrudRepository;
 
 /**
  * Created by dcerecedo on 1/19/14.
  */
-@Document(collection="subscriptions")
-public class SubscriptionMongoImpl extends SubscriptionImpl {
+public interface EventMongoRepository extends CrudRepository<EventMongoImpl, String> {
 }

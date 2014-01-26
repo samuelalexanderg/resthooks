@@ -4,14 +4,14 @@
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GPLv3 for more details.
  ******************************************************************************/
 
-package com.byteflair.resthooks.domain.mongo;
+package com.byteflair.resthooks.db.mongo;
 
-import com.byteflair.resthooks.domain.EventImpl;
+import com.byteflair.resthooks.domain.SubscriptionImpl;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * Created by dcerecedo on 1/19/14.
  */
-@Document(collection="events")
-public class EventMongoImpl extends EventImpl {
+@Document(collection="subscriptions")
+public class SubscriptionMongoImpl extends SubscriptionImpl {
 }

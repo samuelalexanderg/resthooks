@@ -5,4 +5,5 @@ package com.byteflair.resthooks.api;
  */
 public interface Subscription {
 
+    Object getId();
 }

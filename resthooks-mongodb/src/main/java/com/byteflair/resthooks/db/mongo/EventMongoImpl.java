@@ -6,11 +6,12 @@
 
 package com.byteflair.resthooks.db.mongo;
 
-import com.byteflair.resthooks.domain.mongo.EventMongoImpl;
-import org.springframework.data.repository.CrudRepository;
+import com.byteflair.resthooks.domain.EventImpl;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * Created by dcerecedo on 1/19/14.
  */
-public interface EventRepository extends CrudRepository<EventMongoImpl, String> {
+@Document(collection="events")
+public class EventMongoImpl extends EventImpl {
 }

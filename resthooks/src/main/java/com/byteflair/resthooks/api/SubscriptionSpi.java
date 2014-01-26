@@ -37,16 +37,16 @@ public interface SubscriptionSpi {
     @RequestMapping(method=RequestMethod.POST)
     public
     @ResponseBody
-    ResponseEntity<List<Subscription>> createResource(SubscriptionPostForm form);
+    ResponseEntity<Subscription> createResource(SubscriptionPostForm form);
 
     @RequestMapping(value="/{id}", method=RequestMethod.PUT)
     public
     @ResponseBody
-    ResponseEntity<List<Subscription>> updateResource(@PathVariable("id") String id, SubscriptionPutForm form);
+    ResponseEntity<Subscription> updateResource(@PathVariable("id") String id, SubscriptionPutForm form);
 
     @RequestMapping(value="/{id}", method=RequestMethod.DELETE)
     public
     @ResponseBody
-    ResponseEntity<List<Subscription>> deleteResource(@PathVariable("id") String id);
+    ResponseEntity<Subscription> deleteResource(@PathVariable("id") String id);
 
 }

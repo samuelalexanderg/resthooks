@@ -2,17 +2,25 @@ package com.byteflair.resthooks.api;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.ISODateTimeFormat;
 
 /**
  * Created by dcerecedo on 1/24/14.
  */
 public class LogImpl implements Log {
 
+    private final DateTimeFormatter formatter=ISODateTimeFormat.dateTime().withZoneUTC();
+
     private Object id;
     private LogLevel level;
     private String message;
     private Object eventId;
     private DateTime createdAt;
+
+    public LogImpl() {
+
+    }
 
     public LogImpl(Object id, LogLevel level, String message, Object eventId, DateTime createdAt) {
         this.id=id;
@@ -61,5 +69,16 @@ public class LogImpl implements Log {
 
     public void setCreatedAt(DateTime createdAt) {
         this.createdAt=createdAt;
+    }
+
+    @Override
+    public String toString() {
+        return "LogImpl{"+
+              "id="+id+
+              ", level="+level+
+              ", message='"+message+'\''+
+              ", eventId="+eventId+
+              ", createdAt="+formatter.print(createdAt)+
+              '}';
     }
 }
