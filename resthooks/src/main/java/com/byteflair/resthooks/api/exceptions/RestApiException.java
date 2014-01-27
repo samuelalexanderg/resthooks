@@ -10,15 +10,16 @@ public class RestApiException extends Exception {
 
     private static final long serialVersionUID=5726439321553988580L;
 
-    private HttpStatus status=null;
+    private final HttpStatus status;
 
-    private String message=null;
+    private final String message;
 
-    private Throwable reason=null;
+    private final Throwable reason;
 
     RestApiException(HttpStatus status, String message) {
         this.status=status;
         this.message=message;
+        this.reason=null;
     }
 
     protected RestApiException(HttpStatus status, BindingResult result) {
@@ -34,6 +35,7 @@ public class RestApiException extends Exception {
             buffer.append(error.getDefaultMessage());
         }
         this.message=buffer.toString();
+        this.reason=null;
     }
 
     RestApiException(HttpStatus status, String message, Throwable reason) {
