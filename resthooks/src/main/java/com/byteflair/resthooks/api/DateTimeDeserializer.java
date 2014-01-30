@@ -1,4 +1,4 @@
-package com.byteflair.resthooks.api.boundary;
+package com.byteflair.resthooks.api;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;

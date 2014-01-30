@@ -1,7 +1,5 @@
 package com.byteflair.resthooks.api;
 
-import com.byteflair.resthooks.api.boundary.DateTimeDeserializer;
-import com.byteflair.resthooks.api.boundary.DateTimeSerializer;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;

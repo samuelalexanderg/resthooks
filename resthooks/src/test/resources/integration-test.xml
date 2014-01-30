@@ -21,4 +21,5 @@
 	</bean>
 	<bean id="subscriptionRepository" class="com.byteflair.resthooks.db.SubscriptionInMemoryRepository"/>
 	<bean id="logRepository" class="com.byteflair.resthooks.db.LogInMemoryRepository"/>
+	<bean id="eventRepository" class="com.byteflair.resthooks.db.EventInMemoryRepository"/>
 </beans>

@@ -47,7 +47,7 @@ public class LogSpiTest {
     @Autowired
     private LogRepository logRepository;
     private MockMvc mockMvc;
-    private SecureRandom secureRandom=new SecureRandom();
+    private final static SecureRandom secureRandom=new SecureRandom();
 
     @Before
     public void setup() {
