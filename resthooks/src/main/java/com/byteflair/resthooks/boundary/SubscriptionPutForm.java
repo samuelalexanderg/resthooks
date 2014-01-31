@@ -4,13 +4,10 @@
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GPLv3 for more details.
  ******************************************************************************/
 
-package com.byteflair.resthooks.db.mongo;
-
-import com.byteflair.resthooks.services.SubscriptionRepository;
-import org.springframework.data.repository.CrudRepository;
+package com.byteflair.resthooks.boundary;
 
 /**
  * Created by dcerecedo on 1/19/14.
  */
-public interface SubscriptionMongoRepository extends CrudRepository<SubscriptionMongoImpl, String> implements SubscriptionRepository {
+public interface SubscriptionPutForm {
 }

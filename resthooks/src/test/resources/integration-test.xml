@@ -9,13 +9,13 @@
           http://www.springframework.org/schema/mvc/spring-mvc.xsd
           http://www.springframework.org/schema/context
           http://www.springframework.org/schema/context/spring-context.xsd">
-	<context:component-scan base-package="com.byteflair.resthooks"/>
+	<context:component-scan base-package="com.byteflair"/>
 	<mvc:annotation-driven conversion-service="conversionService"/>
 	<bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
 		<property name="converters">
 			<list>
-				<bean class="com.byteflair.resthooks.api.boundary.SubscriptionPostFormConverter"/>
-				<bean class="com.byteflair.resthooks.api.boundary.SubscriptionPutFormConverter"/>
+				<bean class="com.byteflair.resthooks.converters.SubscriptionPostFormConverter"/>
+				<bean class="com.byteflair.resthooks.converters.SubscriptionPutFormConverter"/>
 			</list>
 		</property>
 	</bean>
