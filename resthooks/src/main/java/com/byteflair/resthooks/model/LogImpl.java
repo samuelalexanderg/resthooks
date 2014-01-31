@@ -21,7 +21,14 @@ public class LogImpl implements Log {
     private DateTime createdAt;
 
     public LogImpl() {
+    }
 
+    public LogImpl(Object id, LogLevel level, String message, Object eventId) {
+        this.id=id;
+        this.level=level;
+        this.message=message;
+        this.createdAt=new DateTime();
+        this.eventId=eventId;
     }
 
     public LogImpl(Object id, LogLevel level, String message, Object eventId, DateTime createdAt) {
@@ -69,9 +76,6 @@ public class LogImpl implements Log {
         return createdAt;
     }
 
-    public void setCreatedAt(DateTime createdAt) {
-        this.createdAt=createdAt;
-    }
 
     @Override
     public String toString() {

@@ -20,7 +20,7 @@ import java.util.List;
  * Created by dcerecedo on 1/19/14.
  */
 @Controller
-@RequestMapping("/events")
+@RequestMapping(value="/events", headers="Accept=application/json", produces="application/json")
 public interface EventSpi {
 
     @RequestMapping(method=RequestMethod.GET)

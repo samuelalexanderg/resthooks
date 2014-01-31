@@ -14,7 +14,7 @@ import java.util.List;
  * Created by dcerecedo on 1/24/14.
  */
 @Controller
-@RequestMapping("/logs")
+@RequestMapping(value="/logs", headers="Accept=application/json", produces="application/json")
 public interface LogSpi {
 
     /**
@@ -22,11 +22,11 @@ public interface LogSpi {
      *
      * @return
      */
-    @RequestMapping(method=RequestMethod.GET, headers="Accept=application/json", produces="application/json")
+    @RequestMapping(method=RequestMethod.GET)
     @ResponseBody
     ResponseEntity<List<Log>> getResourceCollection();
 
-    @RequestMapping(value="/{id}", method=RequestMethod.GET, headers="Accept=application/json", produces="application/json")
+    @RequestMapping(value="/{id}", method=RequestMethod.GET)
     @ResponseBody
     ResponseEntity<Log> getResource(@PathVariable("id") String id) throws NotFoundException;
 

@@ -23,6 +23,33 @@ public class EventImpl implements Event {
     private List<Object> history=new ArrayList<>();
     private DateTime createdAt;
 
+    public EventImpl() {
+    }
+
+    public EventImpl(Object id, String type, EventStatus status) {
+        this.id=id;
+        this.type=type;
+        this.status=status;
+        this.createdAt=new DateTime();
+    }
+
+    public EventImpl(Object id, String type, EventStatus status, DateTime createdAt) {
+        this.id=id;
+        this.type=type;
+        this.status=status;
+        this.createdAt=createdAt;
+    }
+
+    public EventImpl(Object id, String type, EventStatus status, List<Object> history) {
+        this(id, type, status);
+        this.history=history;
+    }
+
+    public EventImpl(Object id, String type, EventStatus status, List<Object> history, DateTime createdAt) {
+        this(id, type, status, createdAt);
+        this.history=history;
+    }
+
     public Object getId() {
         return id;
     }

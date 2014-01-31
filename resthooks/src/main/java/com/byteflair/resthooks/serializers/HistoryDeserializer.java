@@ -40,7 +40,7 @@ public class HistoryDeserializer extends JsonDeserializer<List<Object>> {
                 throw new JsonParseException(String.format("The hypermedia supplied %s does not match %s", hypermedium, this.pattern.pattern().toString()), jsonParser.getCurrentLocation());
             }
         }
-        return new ArrayList<>();
+        return history;
     }
 
     private Pattern getHypermediaPattern() {

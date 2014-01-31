@@ -8,7 +8,6 @@ import com.byteflair.resthooks.model.LogImpl;
 import com.byteflair.resthooks.services.LogRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.joda.time.DateTime;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -56,7 +55,7 @@ public class LogSpiTest {
     public void setup() {
         this.mockMvc=MockMvcBuilders.webAppContextSetup(this.wac).build();
         for(int i=0; i<10; i++) {
-            testLogs.add(createLogInstance());
+            testLogs.add(createLog());
             logRepository.save(testLogs.get(i));
         }
     }
@@ -68,8 +67,8 @@ public class LogSpiTest {
         }
     }
 
-    private Log createLogInstance() {
-        Log log=new LogImpl(new BigInteger(16, secureRandom).toString(), LogLevel.INFO, new BigInteger(130, secureRandom).toString(32), new BigInteger(16, secureRandom).toString(), new DateTime());
+    private Log createLog() {
+        Log log=new LogImpl(new BigInteger(16, secureRandom).toString(), LogLevel.INFO, new BigInteger(130, secureRandom).toString(32), new BigInteger(16, secureRandom).toString());
         return log;
     }
 
@@ -93,18 +92,18 @@ public class LogSpiTest {
 
     @Test
     public void thatCanGetSingleLogEntry() throws Exception {
-        String id=(String) logRepository.findAll().get(0).getId();
-        ResultActions result=this.mockMvc.perform(get("/logs/"+id).accept(new MediaType("application", "json")));
-        result.andExpect(status().isOk())
-              .andExpect(content().contentType("application/json"));
-        String json=result.andReturn().getResponse().getContentAsString();
         ObjectMapper mapper=new ObjectMapper();
-        Log log=mapper.readValue(json, LogImpl.class);
-        Log other=logRepository.findOne(id);
-        assertEquals(log.getId(), other.getId());
-        assertEquals(log.getLevel(), other.getLevel());
-        assertEquals(log.getMessage(), other.getMessage());
-        assertTrue(log.getCreatedAt().isEqual(other.getCreatedAt()));
+        for(Log log : testLogs) {
+            ResultActions result=this.mockMvc.perform(get("/logs/"+log.getId()).accept(new MediaType("application", "json")));
+            result.andExpect(status().isOk())
+                  .andExpect(content().contentType("application/json"));
+            String json=result.andReturn().getResponse().getContentAsString();
+            Log other=mapper.readValue(json, LogImpl.class);
+            assertEquals(log.getId(), other.getId());
+            assertEquals(log.getLevel(), other.getLevel());
+            assertEquals(log.getMessage(), other.getMessage());
+            assertTrue(log.getCreatedAt().isEqual(other.getCreatedAt()));
+        }
     }
 
     @Test

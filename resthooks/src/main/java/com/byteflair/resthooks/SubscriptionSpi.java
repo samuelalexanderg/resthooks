@@ -22,7 +22,7 @@ import java.util.List;
  * Created by dcerecedo on 1/19/14.
  */
 @Controller
-@RequestMapping("/subscriptions")
+@RequestMapping(value="/subscriptions", headers="Accept=application/json", produces="application/json")
 public interface SubscriptionSpi {
 
     @RequestMapping(method=RequestMethod.GET)
