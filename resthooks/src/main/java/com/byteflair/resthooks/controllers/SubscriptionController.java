@@ -2,10 +2,7 @@ package com.byteflair.resthooks.controllers;
 
 import com.byteflair.resthooks.Subscription;
 import com.byteflair.resthooks.SubscriptionSpi;
-import com.byteflair.resthooks.boundary.SubscriptionPostForm;
-import com.byteflair.resthooks.boundary.SubscriptionPostFormValidator;
-import com.byteflair.resthooks.boundary.SubscriptionPutForm;
-import com.byteflair.resthooks.boundary.SubscriptionPutFormValidator;
+import com.byteflair.resthooks.boundary.SubscriptionValidator;
 import com.byteflair.resthooks.services.SubscriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -34,7 +31,7 @@ public class SubscriptionController implements SubscriptionSpi {
 
     @InitBinder
     private void initValidators(WebDataBinder binder) {
-        binder.addValidators(new SubscriptionPostFormValidator(), new SubscriptionPutFormValidator());
+        binder.addValidators(new SubscriptionValidator());
     }
 
     @Override
@@ -53,21 +50,19 @@ public class SubscriptionController implements SubscriptionSpi {
     }
 
     @Override
-    public ResponseEntity<Subscription> createResource(@RequestBody @Valid SubscriptionPostForm form) {
+    public ResponseEntity<Subscription> createResource(@RequestBody @Valid Subscription subscription) {
         //TODO service error handling and mapping to RestApiException
-        Subscription subscription=subscriptionService.create(form);
-
         HttpHeaders headers=new HttpHeaders();
-        Method method=ReflectionUtils.findMethod(SubscriptionController.class, "createResource", SubscriptionPostForm.class);
-        headers.setLocation(linkTo(method, form).toUri());
+        Method method=ReflectionUtils.findMethod(SubscriptionController.class, "getResource", String.class);
+        headers.setLocation(linkTo(method, subscription.getId()).toUri());
         return new ResponseEntity<Subscription>(subscription, headers, HttpStatus.CREATED);
     }
 
     @Override
-    public ResponseEntity<Subscription> updateResource(@PathVariable("id") String id, @RequestBody @Valid SubscriptionPutForm form) {
+    public ResponseEntity<Subscription> updateResource(@PathVariable("id") String id, @RequestBody @Valid Subscription subscription) {
         //TODO service error handling and mapping to RestApiException
-        Subscription subscription=subscriptionService.update(form);
-        return new ResponseEntity<Subscription>(subscription, HttpStatus.OK);
+        Subscription updatedSubscription=subscriptionService.update(subscription);
+        return new ResponseEntity<Subscription>(updatedSubscription, HttpStatus.OK);
     }
 
     @Override

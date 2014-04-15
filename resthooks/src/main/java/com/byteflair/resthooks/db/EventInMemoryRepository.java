@@ -13,7 +13,7 @@ import java.util.Map;
  */
 public class EventInMemoryRepository implements EventRepository {
 
-    private Map<Object, Event> eventStore=new HashMap<>();
+    private Map<String, Event> eventStore=new HashMap<>();
 
     @Override
     public void deleteAll() {
@@ -21,7 +21,7 @@ public class EventInMemoryRepository implements EventRepository {
     }
 
     @Override
-    public void delete(Object id) {
+    public void delete(String id) {
         eventStore.remove(id);
     }
 
@@ -31,7 +31,7 @@ public class EventInMemoryRepository implements EventRepository {
     }
 
     @Override
-    public Event findOne(Object id) {
+    public Event findOne(String id) {
         return eventStore.get(id);
     }
 

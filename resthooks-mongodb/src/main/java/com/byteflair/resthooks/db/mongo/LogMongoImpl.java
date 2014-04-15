@@ -1,6 +1,6 @@
 package com.byteflair.resthooks.db.mongo;
 
-import com.byteflair.resthooks.model.LogImpl;
+import com.byteflair.resthooks.domain.LogImpl;
 
 /**
  * Created by dcerecedo on 1/26/14.

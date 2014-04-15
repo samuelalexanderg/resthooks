@@ -1,4 +1,4 @@
-package com.byteflair.resthooks.serializers;
+package com.byteflair.resthooks.domain.serializer;
 
 import com.byteflair.resthooks.LogSpi;
 import com.fasterxml.jackson.core.JsonParseException;
@@ -21,15 +21,15 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 /**
  * Created by dcerecedo on 1/24/14.
  */
-public class HistoryDeserializer extends JsonDeserializer<List<Object>> {
+public class HistoryDeserializer extends JsonDeserializer<List<String>> {
 
     private static Logger LOG=LoggerFactory.getLogger(HistoryDeserializer.class);
     private Pattern pattern=null;
 
     @Override
-    public List<Object> deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
+    public List<String> deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
         List<String> hypermedia=jsonParser.readValueAs(new TypeReference<List<String>>() {});
-        List<Object> history=new ArrayList<>();
+        List<String> history=new ArrayList<>();
         for(String hypermedium : hypermedia) {
             Matcher matcher=getHypermediaPattern().matcher(hypermedium);
             if(matcher.matches()) {

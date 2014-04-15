@@ -13,7 +13,7 @@ import java.util.Map;
  */
 public class LogInMemoryRepository implements LogRepository {
 
-    private Map<Object, Log> logStore=new HashMap<>();
+    private Map<String, Log> logStore=new HashMap<>();
 
     @Override
     public void deleteAll() {
@@ -21,7 +21,7 @@ public class LogInMemoryRepository implements LogRepository {
     }
 
     @Override
-    public void delete(Object id) {
+    public void delete(String id) {
         logStore.remove(id);
     }
 
@@ -31,7 +31,7 @@ public class LogInMemoryRepository implements LogRepository {
     }
 
     @Override
-    public Log findOne(Object id) {
+    public Log findOne(String id) {
         return logStore.get(id);
     }
 

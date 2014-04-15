@@ -13,10 +13,10 @@ import java.util.Map;
  */
 public class SubscriptionInMemoryRepository implements SubscriptionRepository {
 
-    private Map<Object, Subscription> store=new HashMap<>();
+    private Map<String, Subscription> store=new HashMap<>();
 
     @Override
-    public void delete(Object id) {
+    public void delete(String id) {
         store.remove(id);
     }
 
@@ -26,7 +26,7 @@ public class SubscriptionInMemoryRepository implements SubscriptionRepository {
     }
 
     @Override
-    public Subscription findOne(Object id) {
+    public Subscription findOne(String id) {
         return store.get(id);
     }
 

@@ -1,4 +1,4 @@
-package com.byteflair.resthooks.serializers;
+package com.byteflair.resthooks.domain.serializer;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;

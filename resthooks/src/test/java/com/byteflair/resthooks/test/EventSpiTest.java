@@ -4,8 +4,8 @@ import com.byteflair.resthooks.Event;
 import com.byteflair.resthooks.EventStatus;
 import com.byteflair.resthooks.Log;
 import com.byteflair.resthooks.LogLevel;
-import com.byteflair.resthooks.model.EventImpl;
-import com.byteflair.resthooks.model.LogImpl;
+import com.byteflair.resthooks.domain.EventImpl;
+import com.byteflair.resthooks.domain.LogImpl;
 import com.byteflair.resthooks.services.EventRepository;
 import com.byteflair.resthooks.services.LogRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -47,19 +47,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class EventSpiTest {
 
     private final static Logger LOG=LoggerFactory.getLogger(EventSpiTest.class);
-
+    private final SecureRandom secureRandom=new SecureRandom();
+    private final List<Event> testEvents=new ArrayList<>();
+    private final List<Log> testLogs=new ArrayList<>();
     @Autowired
     private WebApplicationContext wac;
     @Autowired
     private LogRepository logRepository;
     @Autowired
     private EventRepository eventRepository;
-
     private MockMvc mockMvc;
-    private final SecureRandom secureRandom=new SecureRandom();
-    private final List<Event> testEvents=new ArrayList<>();
-    private final List<Log> testLogs=new ArrayList<>();
-
 
     private Event createEvent() {
         EventImpl event=new EventImpl(new BigInteger(25, secureRandom).toString(32),

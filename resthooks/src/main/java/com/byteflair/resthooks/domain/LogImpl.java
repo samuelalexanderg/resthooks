@@ -1,4 +1,4 @@
-package com.byteflair.resthooks.model;
+package com.byteflair.resthooks.domain;
 
 import com.byteflair.resthooks.Log;
 import com.byteflair.resthooks.LogLevel;
@@ -14,7 +14,7 @@ public class LogImpl implements Log {
 
     private final DateTimeFormatter formatter=ISODateTimeFormat.dateTime().withZoneUTC();
 
-    private Object id;
+    private String id;
     private LogLevel level;
     private String message;
     private Object eventId;
@@ -23,7 +23,7 @@ public class LogImpl implements Log {
     public LogImpl() {
     }
 
-    public LogImpl(Object id, LogLevel level, String message, Object eventId) {
+    public LogImpl(String id, LogLevel level, String message, Object eventId) {
         this.id=id;
         this.level=level;
         this.message=message;
@@ -31,7 +31,7 @@ public class LogImpl implements Log {
         this.eventId=eventId;
     }
 
-    public LogImpl(Object id, LogLevel level, String message, Object eventId, DateTime createdAt) {
+    public LogImpl(String id, LogLevel level, String message, Object eventId, DateTime createdAt) {
         this.id=id;
         this.level=level;
         this.message=message;
@@ -39,11 +39,11 @@ public class LogImpl implements Log {
         this.eventId=eventId;
     }
 
-    public Object getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Object id) {
+    public void setId(String id) {
         this.id=id;
     }
 
@@ -63,6 +63,10 @@ public class LogImpl implements Log {
         this.message=message;
     }
 
+    public DateTime getCreatedAt() {
+        return createdAt;
+    }
+
     @JsonIgnore
     public Object getEventId() {
         return eventId;
@@ -71,11 +75,6 @@ public class LogImpl implements Log {
     public void setEventId(Object eventId) {
         this.eventId=eventId;
     }
-
-    public DateTime getCreatedAt() {
-        return createdAt;
-    }
-
 
     @Override
     public String toString() {

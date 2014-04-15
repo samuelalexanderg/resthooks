@@ -1,8 +1,6 @@
 package com.byteflair.resthooks.services;
 
 import com.byteflair.resthooks.Subscription;
-import com.byteflair.resthooks.boundary.SubscriptionPostForm;
-import com.byteflair.resthooks.boundary.SubscriptionPutForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,11 +24,11 @@ public class SubscriptionService {
         return null;
     }
 
-    public Subscription create(SubscriptionPostForm form) {
+    public Subscription create(Subscription form) {
         return null;
     }
 
-    public Subscription update(SubscriptionPutForm form) {
+    public Subscription update(Subscription form) {
         return null;
     }
 }

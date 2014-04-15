@@ -1,9 +1,9 @@
 package com.byteflair.resthooks;
 
-import com.byteflair.resthooks.serializers.DateTimeDeserializer;
-import com.byteflair.resthooks.serializers.DateTimeSerializer;
-import com.byteflair.resthooks.serializers.HistoryDeserializer;
-import com.byteflair.resthooks.serializers.HistorySerializer;
+import com.byteflair.resthooks.domain.serializer.DateTimeDeserializer;
+import com.byteflair.resthooks.domain.serializer.DateTimeSerializer;
+import com.byteflair.resthooks.domain.serializer.HistoryDeserializer;
+import com.byteflair.resthooks.domain.serializer.HistorySerializer;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -18,7 +18,7 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown=true)
 public interface Event {
 
-    Object getId();
+    String getId();
 
     String getType();
 
@@ -26,7 +26,7 @@ public interface Event {
 
     @JsonSerialize(using=HistorySerializer.class)
     @JsonDeserialize(using=HistoryDeserializer.class)
-    List<Object> getHistory();
+    List<String> getHistory();
 
     @JsonSerialize(using=DateTimeSerializer.class)
     @JsonDeserialize(using=DateTimeDeserializer.class)

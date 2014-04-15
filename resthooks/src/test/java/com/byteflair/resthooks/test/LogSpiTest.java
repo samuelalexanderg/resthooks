@@ -4,7 +4,7 @@ import com.byteflair.rest.exceptions.NotFoundException;
 import com.byteflair.rest.exceptions.RestApiException;
 import com.byteflair.resthooks.Log;
 import com.byteflair.resthooks.LogLevel;
-import com.byteflair.resthooks.model.LogImpl;
+import com.byteflair.resthooks.domain.LogImpl;
 import com.byteflair.resthooks.services.LogRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -43,13 +43,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ContextConfiguration("classpath:integration-test.xml")
 public class LogSpiTest {
 
+    private final SecureRandom secureRandom=new SecureRandom();
+    private final List<Log> testLogs=new ArrayList<>();
     @Autowired
     private WebApplicationContext wac;
     @Autowired
     private LogRepository logRepository;
     private MockMvc mockMvc;
-    private final SecureRandom secureRandom=new SecureRandom();
-    private final List<Log> testLogs=new ArrayList<>();
 
     @Before
     public void setup() {

@@ -1,8 +1,8 @@
-package com.byteflair.resthooks.model.test;
+package com.byteflair.resthooks.domain.test;
 
 import com.byteflair.resthooks.Log;
 import com.byteflair.resthooks.LogLevel;
-import com.byteflair.resthooks.model.LogImpl;
+import com.byteflair.resthooks.domain.LogImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jayway.jsonpath.JsonPath;
 import org.joda.time.DateTime;

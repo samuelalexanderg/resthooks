@@ -1,4 +1,4 @@
-package com.byteflair.resthooks.serializers;
+package com.byteflair.resthooks.domain.serializer;
 
 import com.byteflair.resthooks.LogSpi;
 import com.fasterxml.jackson.core.JsonGenerator;
@@ -14,10 +14,10 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 /**
  * Created by dcerecedo on 1/30/14.
  */
-public class HistorySerializer extends JsonSerializer<List<Object>> {
+public class HistorySerializer extends JsonSerializer<List<String>> {
 
     @Override
-    public void serialize(List<Object> value, JsonGenerator jsonGenerator, SerializerProvider provider) throws IOException {
+    public void serialize(List<String> value, JsonGenerator jsonGenerator, SerializerProvider provider) throws IOException {
         jsonGenerator.writeStartArray();
         for(Object id : value) {
             jsonGenerator.writeString(this.getHypermediaForId(id.toString()));

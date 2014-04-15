@@ -1,7 +1,7 @@
 package com.byteflair.resthooks;
 
-import com.byteflair.resthooks.serializers.DateTimeDeserializer;
-import com.byteflair.resthooks.serializers.DateTimeSerializer;
+import com.byteflair.resthooks.domain.serializer.DateTimeDeserializer;
+import com.byteflair.resthooks.domain.serializer.DateTimeSerializer;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -13,7 +13,7 @@ import org.joda.time.DateTime;
 @JsonIgnoreProperties(ignoreUnknown=true)
 public interface Log {
 
-    Object getId();
+    String getId();
 
     LogLevel getLevel();
 

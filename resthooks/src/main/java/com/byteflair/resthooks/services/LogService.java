@@ -20,7 +20,7 @@ public class LogService {
         return logRepository.findAll();
     }
 
-    public Log get(Object id) {
+    public Log get(String id) {
         return logRepository.findOne(id);
     }
 }

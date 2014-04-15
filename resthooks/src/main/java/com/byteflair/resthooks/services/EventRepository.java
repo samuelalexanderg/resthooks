@@ -1,21 +1,23 @@
 package com.byteflair.resthooks.services;
 
 import com.byteflair.resthooks.Event;
+import org.springframework.data.repository.NoRepositoryBean;
 
 import java.util.List;
 
 /**
  * Created by dcerecedo on 1/30/14.
  */
-public interface EventRepository {
+@NoRepositoryBean
+public interface EventRepository extends BaseRepository<Event, String> {
 
     void deleteAll();
 
-    void delete(Object id);
+    void delete(String id);
 
     List<Event> findAll();
 
-    Event findOne(Object id);
+    Event findOne(String id);
 
     Event save(Event event);
 }

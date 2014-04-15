@@ -6,11 +6,11 @@
 
 package com.byteflair.resthooks.db.mongo;
 
-import com.byteflair.resthooks.services.SubscriptionRepository;
+import com.byteflair.resthooks.Subscription;
 import org.springframework.data.repository.CrudRepository;
 
 /**
  * Created by dcerecedo on 1/19/14.
  */
-public interface SubscriptionMongoRepository extends CrudRepository<SubscriptionMongoImpl, String> implements SubscriptionRepository {
+public interface SubscriptionMongoRepository extends CrudRepository<Subscription, String> {
 }

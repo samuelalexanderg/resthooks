@@ -1,4 +1,4 @@
-package com.byteflair.resthooks.model;
+package com.byteflair.resthooks.domain;
 
 import com.byteflair.resthooks.Event;
 import com.byteflair.resthooks.EventStatus;
@@ -17,7 +17,7 @@ public class EventImpl implements Event {
 
     private final DateTimeFormatter formatter=ISODateTimeFormat.dateTime().withZoneUTC();
 
-    private Object id;
+    private String id;
     private String type;
     private EventStatus status;
     private List<Object> history=new ArrayList<>();
@@ -26,35 +26,35 @@ public class EventImpl implements Event {
     public EventImpl() {
     }
 
-    public EventImpl(Object id, String type, EventStatus status) {
+    public EventImpl(String id, String type, EventStatus status) {
         this.id=id;
         this.type=type;
         this.status=status;
         this.createdAt=new DateTime();
     }
 
-    public EventImpl(Object id, String type, EventStatus status, DateTime createdAt) {
+    public EventImpl(String id, String type, EventStatus status, DateTime createdAt) {
         this.id=id;
         this.type=type;
         this.status=status;
         this.createdAt=createdAt;
     }
 
-    public EventImpl(Object id, String type, EventStatus status, List<Object> history) {
+    public EventImpl(String id, String type, EventStatus status, List<Object> history) {
         this(id, type, status);
         this.history=history;
     }
 
-    public EventImpl(Object id, String type, EventStatus status, List<Object> history, DateTime createdAt) {
+    public EventImpl(String id, String type, EventStatus status, List<Object> history, DateTime createdAt) {
         this(id, type, status, createdAt);
         this.history=history;
     }
 
-    public Object getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Object id) {
+    public void setId(String id) {
         this.id=id;
     }
 
@@ -74,16 +74,16 @@ public class EventImpl implements Event {
         this.status=status;
     }
 
+    public List<Object> getHistory() {
+        return Collections.unmodifiableList(this.history);
+    }
+
     public DateTime getCreatedAt() {
         return createdAt;
     }
 
     public void setCreatedAt(DateTime createdAt) {
         this.createdAt=createdAt;
-    }
-
-    public List<Object> getHistory() {
-        return Collections.unmodifiableList(this.history);
     }
 
     public void addHistory(Object historyItem) {
