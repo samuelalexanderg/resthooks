@@ -23,7 +23,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
  */
 public class HistoryDeserializer extends JsonDeserializer<List<String>> {
 
-    private static Logger LOG=LoggerFactory.getLogger(HistoryDeserializer.class);
+    private static Logger LOGGER=LoggerFactory.getLogger(HistoryDeserializer.class);
     private Pattern pattern=null;
 
     @Override
@@ -36,7 +36,7 @@ public class HistoryDeserializer extends JsonDeserializer<List<String>> {
                 String id=matcher.group(matcher.groupCount());
                 history.add(id);
             } else {
-                LOG.error(String.format("The hypermedia supplied %s does not match %s", hypermedium, this.pattern.pattern().toString()));
+                LOGGER.error(String.format("The hypermedia supplied %s does not match %s", hypermedium, this.pattern.pattern().toString()));
                 throw new JsonParseException(String.format("The hypermedia supplied %s does not match %s", hypermedium, this.pattern.pattern().toString()), jsonParser.getCurrentLocation());
             }
         }

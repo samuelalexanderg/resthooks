@@ -16,7 +16,7 @@ import java.util.*;
  */
 public class UpdatableResourceComparator {
 
-    private static final Logger LOG=LoggerFactory.getLogger(UpdatableResourceComparator.class);
+    private static final Logger LOGGER=LoggerFactory.getLogger(UpdatableResourceComparator.class);
 
     public static ComparisonVeredict compare(final Object existing, final Object update) {
         final ComparisonVeredict result=new UpdatableResourceComparator().new ComparisonVeredict();
@@ -56,7 +56,7 @@ public class UpdatableResourceComparator {
             /**
              * Never used
              */
-            LOG.error("Tried to access field {}.{} but it was not readable. Caused by {}", existing.getClass().getName(), field.getName(), e.getMessage());
+            LOGGER.error("Tried to access field {}.{} but it was not readable. Caused by {}", existing.getClass().getName(), field.getName(), e.getMessage());
         }
     }
 
@@ -74,13 +74,13 @@ public class UpdatableResourceComparator {
              */
             if(!one.getClass().equals(two.getClass())) {
                 if(one.getClass().isAssignableFrom(two.getClass())) {
-                    LOG.warn("Comparing objects of different class: {} to {}", first.getClass().getName(), second.getClass().getName());
+                    LOGGER.warn("Comparing objects of different class: {} to {}", first.getClass().getName(), second.getClass().getName());
                 } else if(two.getClass().isAssignableFrom(one.getClass())) {
                     first=two;
                     second=one;
-                    LOG.warn("Comparing objects of different class: {} to {}", first.getClass().getName(), second.getClass().getName());
+                    LOGGER.warn("Comparing objects of different class: {} to {}", first.getClass().getName(), second.getClass().getName());
                 } else {
-                    LOG.error("The objects to compare must be of the same class. Unable to compare {} with {}", one.getClass().getName(), two.getClass().getName());
+                    LOGGER.error("The objects to compare must be of the same class. Unable to compare {} with {}", one.getClass().getName(), two.getClass().getName());
                     throw new IllegalArgumentException(String.format("The objects to compare must be of the same class. Unable to compare %s with %s", one.getClass().getName(), two.getClass().getName()));
                 }
             }

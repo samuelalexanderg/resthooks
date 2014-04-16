@@ -21,7 +21,7 @@ import java.util.Map;
  */
 public class LogTest {
 
-    private final static Logger LOG=LoggerFactory.getLogger(LogTest.class);
+    private final static Logger LOGGER=LoggerFactory.getLogger(LogTest.class);
 
     @Test
     public void thatProperlySerializesToJson() throws Exception {
@@ -48,7 +48,7 @@ public class LogTest {
          */
         Assert.assertNull(JsonPath.read(json, "eventId"));
 
-        LOG.info("thatProperlySerializesToJson produced:\n{}", json);
+        LOGGER.info("thatProperlySerializesToJson produced:\n{}", json);
     }
 
     @Test
@@ -83,7 +83,7 @@ public class LogTest {
          */
         Assert.assertNull(JsonPath.read(json, "eventId"));
 
-        LOG.info("thatProperlyDeserializesFromJson deserialized:\n{}\ninto...\n{}", json, logEntry);
+        LOGGER.info("thatProperlyDeserializesFromJson deserialized:\n{}\ninto...\n{}", json, logEntry);
     }
 
     @Test
@@ -119,7 +119,7 @@ public class LogTest {
          */
         Assert.assertNull(JsonPath.read(json, "eventId"));
 
-        LOG.info("thatDeserializationDoesNotFailOnUnknownProperties deserialized:\n{}\ninto...\n{}", json, logEntry);
+        LOGGER.info("thatDeserializationDoesNotFailOnUnknownProperties deserialized:\n{}\ninto...\n{}", json, logEntry);
 
     }
 }

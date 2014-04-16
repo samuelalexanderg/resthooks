@@ -1,7 +1,7 @@
 package com.byteflair.resthooks.db;
 
 import com.byteflair.resthooks.api.Subscription;
-import com.byteflair.resthooks.services.SubscriptionRepository;
+import com.byteflair.resthooks.domain.services.SubscriptionRepository;
 
 import java.util.ArrayList;
 import java.util.HashMap;

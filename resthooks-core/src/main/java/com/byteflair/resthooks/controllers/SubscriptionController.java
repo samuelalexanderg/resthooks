@@ -3,7 +3,7 @@ package com.byteflair.resthooks.controllers;
 import com.byteflair.resthooks.api.Subscription;
 import com.byteflair.resthooks.api.SubscriptionSpi;
 import com.byteflair.resthooks.boundary.SubscriptionValidator;
-import com.byteflair.resthooks.services.SubscriptionService;
+import com.byteflair.resthooks.domain.services.SubscriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -39,14 +39,14 @@ public class SubscriptionController implements SubscriptionSpi {
         //TODO service error handling and mapping to RestApiException
         List<Subscription> subscriptions=new ArrayList<>();
         subscriptions.addAll(subscriptionService.getAll());
-        return new ResponseEntity<List<Subscription>>(subscriptions, HttpStatus.OK);
+        return new ResponseEntity<>(subscriptions, HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<Subscription> getResource(@PathVariable("id") String id) {
         //TODO service error handling and mapping to RestApiException
         Subscription subscription=subscriptionService.get(id);
-        return new ResponseEntity<Subscription>(subscription, HttpStatus.OK);
+        return new ResponseEntity<>(subscription, HttpStatus.OK);
     }
 
     @Override
@@ -55,19 +55,19 @@ public class SubscriptionController implements SubscriptionSpi {
         HttpHeaders headers=new HttpHeaders();
         Method method=ReflectionUtils.findMethod(SubscriptionController.class, "getResource", String.class);
         headers.setLocation(linkTo(method, subscription.getId()).toUri());
-        return new ResponseEntity<Subscription>(subscription, headers, HttpStatus.CREATED);
+        return new ResponseEntity<>(subscription, headers, HttpStatus.CREATED);
     }
 
     @Override
     public ResponseEntity<Subscription> updateResource(@PathVariable("id") String id, @RequestBody @Valid Subscription subscription) {
         //TODO service error handling and mapping to RestApiException
         Subscription updatedSubscription=subscriptionService.update(subscription);
-        return new ResponseEntity<Subscription>(updatedSubscription, HttpStatus.OK);
+        return new ResponseEntity<>(updatedSubscription, HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<Subscription> deleteResource(@PathVariable("id") String id) {
         //TODO service error handling and mapping to RestApiException
-        return new ResponseEntity<Subscription>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 }

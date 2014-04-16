@@ -3,7 +3,7 @@ package com.byteflair.resthooks.api;
 import com.byteflair.rest.exceptions.ResourceNotFoundException;
 import com.byteflair.rest.exceptions.RestApiException;
 import com.byteflair.resthooks.domain.LogImpl;
-import com.byteflair.resthooks.services.LogRepository;
+import com.byteflair.resthooks.domain.services.LogRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.After;

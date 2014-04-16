@@ -43,7 +43,7 @@ public class EventTest {
 
     private final static SecureRandom secureRandom=new SecureRandom();
 
-    private final static Logger LOG=LoggerFactory.getLogger(EventTest.class);
+    private final static Logger LOGGER=LoggerFactory.getLogger(EventTest.class);
 
     private Event createEvent() {
         EventImpl event=new EventImpl();
@@ -80,7 +80,7 @@ public class EventTest {
                   linkTo(ReflectionUtils.findMethod(LogSpi.class, "getResource", String.class), event.getHistory().get(i++)).withSelfRel().getHref()
             );
         }*/
-        LOG.info("thatProperlySerializesToJson produced:\n{}", json);
+        LOGGER.info("thatProperlySerializesToJson produced:\n{}", json);
     }
 
     @Test
@@ -109,7 +109,7 @@ public class EventTest {
             );
         }
 
-        LOG.info("thatProperlyDeserializesFromJson deserialized from\n{}\ninto...\n{}", json, otherEvent);
+        LOGGER.info("thatProperlyDeserializesFromJson deserialized from\n{}\ninto...\n{}", json, otherEvent);
     }
 
 }

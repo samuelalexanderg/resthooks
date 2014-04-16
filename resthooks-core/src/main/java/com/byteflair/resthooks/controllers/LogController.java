@@ -3,7 +3,7 @@ package com.byteflair.resthooks.controllers;
 import com.byteflair.rest.exceptions.ResourceNotFoundException;
 import com.byteflair.resthooks.api.Log;
 import com.byteflair.resthooks.api.LogSpi;
-import com.byteflair.resthooks.services.LogService;
+import com.byteflair.resthooks.domain.services.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

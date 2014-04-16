@@ -2,8 +2,8 @@ package com.byteflair.resthooks.api;
 
 import com.byteflair.resthooks.domain.EventImpl;
 import com.byteflair.resthooks.domain.LogImpl;
-import com.byteflair.resthooks.services.EventRepository;
-import com.byteflair.resthooks.services.LogRepository;
+import com.byteflair.resthooks.domain.services.EventRepository;
+import com.byteflair.resthooks.domain.services.LogRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.After;
@@ -46,7 +46,7 @@ import java.util.List;
 
 public class EventSpiTest {
 
-    private final static Logger LOG=LoggerFactory.getLogger(EventSpiTest.class);
+    private final static Logger LOGGER=LoggerFactory.getLogger(EventSpiTest.class);
     private final SecureRandom secureRandom=new SecureRandom();
     private final List<Event> testEvents=new ArrayList<>();
     private final List<Log> testLogs=new ArrayList<>();

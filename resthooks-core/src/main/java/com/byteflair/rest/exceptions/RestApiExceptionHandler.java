@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class RestApiExceptionHandler {
 
-    private final static Logger LOG=LoggerFactory.getLogger(RestApiExceptionHandler.class);
+    private final static Logger LOGGER=LoggerFactory.getLogger(RestApiExceptionHandler.class);
 
     @ExceptionHandler(RestApiException.class)
     public ResponseEntity<RestApiException> handleException(RestApiException exception) {
-        LOG.error("Sending error to client {}", exception);
+        LOGGER.error("Sending error to client {}", exception);
         return new ResponseEntity<RestApiException>(exception, exception.getStatus());
     }
 
