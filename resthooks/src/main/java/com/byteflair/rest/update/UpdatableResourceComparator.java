@@ -42,7 +42,10 @@ public class UpdatableResourceComparator {
                         }
                     }
                 } catch(NotReadablePropertyException e) {
-                    e.printStackTrace();
+                    /**
+                     * Never used
+                     */
+                    logger.error("Tried to access field {}.{} but it was not readable", existing.getClass().getName(), field.getName());
                 }
             }
         }, new ReflectionUtils.FieldFilter() {
