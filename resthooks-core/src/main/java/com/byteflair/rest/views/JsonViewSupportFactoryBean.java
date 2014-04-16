@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
-import org.springframework.web.method.support.HandlerMethodReturnValueHandlerComposite;
 import org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 
@@ -21,18 +20,27 @@ public class JsonViewSupportFactoryBean implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        HandlerMethodReturnValueHandlerComposite returnValueHandlers=adapter.getReturnValueHandlers();
-        List<HandlerMethodReturnValueHandler> handlers=new ArrayList<HandlerMethodReturnValueHandler>(returnValueHandlers.getHandlers());
-        decorateHandlers(handlers);
-        adapter.setReturnValueHandlers(handlers);
+        List<HandlerMethodReturnValueHandler> handlers=adapter.getReturnValueHandlers();
+        List<HandlerMethodReturnValueHandler> customHandlers=new ArrayList<>();
+        for(HandlerMethodReturnValueHandler handler : handlers) {
+            if(handler instanceof HttpEntityMethodProcessor) {
+                ViewInjectingReturnValueHandler decorator=new ViewInjectingReturnValueHandler(handler);
+                customHandlers.add(decorator);
+                LOGGER.debug("JsonView decorator support wired up");
+                break;
+            }
+        }
+        adapter.setCustomReturnValueHandlers(customHandlers);
     }
 
     private void decorateHandlers(List<HandlerMethodReturnValueHandler> handlers) {
+        List<HandlerMethodReturnValueHandler> customHandlers=new ArrayList<>();
         for(HandlerMethodReturnValueHandler handler : handlers) {
             if(handler instanceof HttpEntityMethodProcessor) {
                 ViewInjectingReturnValueHandler decorator=new ViewInjectingReturnValueHandler(handler);
                 int index=handlers.indexOf(handler);
                 handlers.set(index, decorator);
+
                 LOGGER.debug("JsonView decorator support wired up");
                 break;
             }
