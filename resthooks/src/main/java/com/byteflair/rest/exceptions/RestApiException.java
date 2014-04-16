@@ -56,10 +56,6 @@ public class RestApiException extends Exception {
         return message;
     }
 
-    public Throwable getReason() {
-        return this.reason;
-    }
-
     @Override
     public String toString() {
         return "RestApiException{"+
@@ -67,5 +63,9 @@ public class RestApiException extends Exception {
               ", message='"+message+'\''+
               ", reason="+reason+
               '}';
+    }
+
+    public Throwable getReason() {
+        return this.reason;
     }
 }

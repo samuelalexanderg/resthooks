@@ -14,7 +14,6 @@
 	</camel:camelContext>
 
 
-
 	<bean id="jmsConnectionFactory"
 		  class="org.apache.activemq.ActiveMQConnectionFactory">
 		<property name="brokerURL" value="vm://localhost"/>

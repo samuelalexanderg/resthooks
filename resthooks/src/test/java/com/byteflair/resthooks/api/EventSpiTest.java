@@ -33,12 +33,6 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 
 /**
  * Created by dcerecedo on 1/24/14.
@@ -53,19 +47,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class EventSpiTest {
 
     private final static Logger LOG=LoggerFactory.getLogger(EventSpiTest.class);
-
+    private final SecureRandom secureRandom=new SecureRandom();
+    private final List<Event> testEvents=new ArrayList<>();
+    private final List<Log> testLogs=new ArrayList<>();
     @Autowired
     private WebApplicationContext wac;
     @Autowired
     private LogRepository logRepository;
     @Autowired
     private EventRepository eventRepository;
-
     private MockMvc mockMvc;
-
-    private final SecureRandom secureRandom=new SecureRandom();
-    private final List<Event> testEvents=new ArrayList<>();
-    private final List<Log> testLogs=new ArrayList<>();
 
     private Event createEvent() {
         EventImpl event=new EventImpl(new BigInteger(25, secureRandom).toString(32),
@@ -84,10 +75,10 @@ public class EventSpiTest {
         return log;
     }
 
-    private Filter[] getServletFilters(){
-        CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
+    private Filter[] getServletFilters() {
+        CharacterEncodingFilter characterEncodingFilter=new CharacterEncodingFilter();
         characterEncodingFilter.setEncoding("UTF-8");
-        return new Filter[] { characterEncodingFilter};
+        return new Filter[] { characterEncodingFilter };
     }
 
     @Before

@@ -32,9 +32,6 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 /**
  * Created by dcerecedo on 1/26/14.
  */
@@ -47,20 +44,18 @@ import static org.junit.Assert.assertTrue;
 })
 public class LogSpiTest {
 
+    private final SecureRandom secureRandom=new SecureRandom();
+    private final List<Log> testLogs=new ArrayList<>();
     @Autowired
     private WebApplicationContext wac;
     @Autowired
     private LogRepository logRepository;
-
     private MockMvc mockMvc;
 
-    private final SecureRandom secureRandom=new SecureRandom();
-    private final List<Log> testLogs=new ArrayList<>();
-
-    private Filter[] getServletFilters(){
-        CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
+    private Filter[] getServletFilters() {
+        CharacterEncodingFilter characterEncodingFilter=new CharacterEncodingFilter();
         characterEncodingFilter.setEncoding("UTF-8");
-        return new Filter[] { characterEncodingFilter};
+        return new Filter[] { characterEncodingFilter };
     }
 
     @Before
@@ -123,7 +118,7 @@ public class LogSpiTest {
 
     @Test
     public void thatThrowsNotFoundException() throws Exception {
-        String id= logRepository.findAll().get(0).getId();
+        String id=logRepository.findAll().get(0).getId();
         logRepository.delete(id);
         ResultActions result=this.mockMvc.perform(MockMvcRequestBuilders.get("/logs/"+id).accept(new MediaType("application", "json")));
         result.andExpect(MockMvcResultMatchers.status().isNotFound())

@@ -27,7 +27,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
 /**
  * Created by dcerecedo on 1/24/14.
- *
+ * <p/>
  * This test requires the context-servlet.xml to build references to controllers,
  * becuase the serialization/deserialization process requires building links to
  * resources.

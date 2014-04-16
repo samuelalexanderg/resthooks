@@ -6,7 +6,6 @@
 
 package com.byteflair.resthooks.api;
 
-import com.byteflair.rest.exceptions.ResourceNotFoundException;
 import com.byteflair.rest.exceptions.RestApiException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
