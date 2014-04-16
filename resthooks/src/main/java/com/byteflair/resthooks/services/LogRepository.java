@@ -1,6 +1,6 @@
 package com.byteflair.resthooks.services;
 
-import com.byteflair.resthooks.Log;
+import com.byteflair.resthooks.api.Log;
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.Repository;
 

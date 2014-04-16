@@ -1,6 +1,6 @@
 package com.byteflair.resthooks.boundary;
 
-import com.byteflair.resthooks.Subscription;
+import com.byteflair.resthooks.api.Subscription;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 

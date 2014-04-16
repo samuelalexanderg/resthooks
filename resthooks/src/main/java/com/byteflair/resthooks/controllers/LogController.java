@@ -1,8 +1,8 @@
 package com.byteflair.resthooks.controllers;
 
-import com.byteflair.rest.exceptions.NotFoundException;
-import com.byteflair.resthooks.Log;
-import com.byteflair.resthooks.LogSpi;
+import com.byteflair.rest.exceptions.ResourceNotFoundException;
+import com.byteflair.resthooks.api.Log;
+import com.byteflair.resthooks.api.LogSpi;
 import com.byteflair.resthooks.services.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,15 +27,15 @@ public class LogController implements LogSpi {
     public ResponseEntity<List<Log>> getResourceCollection() {
         List<Log> logs=new ArrayList<>();
         logs.addAll(logService.getAll());
-        return new ResponseEntity<List<Log>>(logs, HttpStatus.OK);
+        return new ResponseEntity<>(logs, HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<Log> getResource(@PathVariable("id") String id) throws NotFoundException {
+    public ResponseEntity<Log> getResource(@PathVariable("id") String id) throws ResourceNotFoundException {
         Log log=logService.get(id);
         if(log == null) {
-            throw new NotFoundException("Entity not found");
+            throw new ResourceNotFoundException("Entity not found");
         }
-        return new ResponseEntity<Log>(log, HttpStatus.OK);
+        return new ResponseEntity<>(log, HttpStatus.OK);
     }
 }

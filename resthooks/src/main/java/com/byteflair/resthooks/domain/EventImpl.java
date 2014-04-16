@@ -1,13 +1,12 @@
 package com.byteflair.resthooks.domain;
 
-import com.byteflair.resthooks.Event;
-import com.byteflair.resthooks.EventStatus;
+import com.byteflair.resthooks.api.Event;
+import com.byteflair.resthooks.api.EventStatus;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -20,7 +19,7 @@ public class EventImpl implements Event {
     private String id;
     private String type;
     private EventStatus status;
-    private List<Object> history=new ArrayList<>();
+    private List<String> history=new ArrayList<>();
     private DateTime createdAt;
 
     public EventImpl() {
@@ -40,12 +39,12 @@ public class EventImpl implements Event {
         this.createdAt=createdAt;
     }
 
-    public EventImpl(String id, String type, EventStatus status, List<Object> history) {
+    public EventImpl(String id, String type, EventStatus status, List<String> history) {
         this(id, type, status);
         this.history=history;
     }
 
-    public EventImpl(String id, String type, EventStatus status, List<Object> history, DateTime createdAt) {
+    public EventImpl(String id, String type, EventStatus status, List<String> history, DateTime createdAt) {
         this(id, type, status, createdAt);
         this.history=history;
     }
@@ -74,8 +73,8 @@ public class EventImpl implements Event {
         this.status=status;
     }
 
-    public List<Object> getHistory() {
-        return Collections.unmodifiableList(this.history);
+    public List<String> getHistory() {
+        return new ArrayList<>(this.history);
     }
 
     public DateTime getCreatedAt() {
@@ -86,7 +85,7 @@ public class EventImpl implements Event {
         this.createdAt=createdAt;
     }
 
-    public void addHistory(Object historyItem) {
+    public void addHistory(String historyItem) {
         this.history.add(historyItem);
     }
 

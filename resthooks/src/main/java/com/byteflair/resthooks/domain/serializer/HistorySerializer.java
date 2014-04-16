@@ -1,6 +1,6 @@
 package com.byteflair.resthooks.domain.serializer;
 
-import com.byteflair.resthooks.LogSpi;
+import com.byteflair.resthooks.api.LogSpi;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;

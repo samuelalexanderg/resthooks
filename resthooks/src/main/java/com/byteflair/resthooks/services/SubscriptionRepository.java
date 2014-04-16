@@ -1,6 +1,6 @@
 package com.byteflair.resthooks.services;
 
-import com.byteflair.resthooks.Subscription;
+import com.byteflair.resthooks.api.Subscription;
 import org.springframework.data.repository.NoRepositoryBean;
 
 import java.util.List;

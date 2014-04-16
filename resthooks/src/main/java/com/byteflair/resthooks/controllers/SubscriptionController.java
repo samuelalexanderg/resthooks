@@ -1,7 +1,7 @@
 package com.byteflair.resthooks.controllers;
 
-import com.byteflair.resthooks.Subscription;
-import com.byteflair.resthooks.SubscriptionSpi;
+import com.byteflair.resthooks.api.Subscription;
+import com.byteflair.resthooks.api.SubscriptionSpi;
 import com.byteflair.resthooks.boundary.SubscriptionValidator;
 import com.byteflair.resthooks.services.SubscriptionService;
 import org.springframework.beans.factory.annotation.Autowired;

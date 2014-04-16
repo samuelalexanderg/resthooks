@@ -1,8 +1,8 @@
 package com.byteflair.resthooks.controllers;
 
-import com.byteflair.rest.exceptions.NotFoundException;
-import com.byteflair.resthooks.Event;
-import com.byteflair.resthooks.EventSpi;
+import com.byteflair.rest.exceptions.ResourceNotFoundException;
+import com.byteflair.resthooks.api.Event;
+import com.byteflair.resthooks.api.EventSpi;
 import com.byteflair.resthooks.services.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,15 +27,15 @@ public class EventController implements EventSpi {
     public ResponseEntity<List<Event>> getResourceCollection() {
         List<Event> events=new ArrayList<>();
         events.addAll(eventService.getAll());
-        return new ResponseEntity<List<Event>>(events, HttpStatus.OK);
+        return new ResponseEntity<>(events, HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<Event> getResource(@PathVariable("id") String id) throws NotFoundException {
+    public ResponseEntity<Event> getResource(@PathVariable("id") String id) throws ResourceNotFoundException {
         Event event=eventService.get(id);
         if(event == null) {
-            throw new NotFoundException("Entity not found");
+            throw new ResourceNotFoundException("Entity not found");
         }
-        return new ResponseEntity<Event>(event, HttpStatus.OK);
+        return new ResponseEntity<>(event, HttpStatus.OK);
     }
 }

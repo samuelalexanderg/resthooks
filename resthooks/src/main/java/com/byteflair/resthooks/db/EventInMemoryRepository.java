@@ -1,6 +1,6 @@
 package com.byteflair.resthooks.db;
 
-import com.byteflair.resthooks.Event;
+import com.byteflair.resthooks.api.Event;
 import com.byteflair.resthooks.services.EventRepository;
 
 import java.util.ArrayList;

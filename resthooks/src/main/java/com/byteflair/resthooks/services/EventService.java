@@ -1,6 +1,6 @@
 package com.byteflair.resthooks.services;
 
-import com.byteflair.resthooks.Event;
+import com.byteflair.resthooks.api.Event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

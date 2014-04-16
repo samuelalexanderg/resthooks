@@ -1,6 +1,6 @@
 package com.byteflair.resthooks.services;
 
-import com.byteflair.resthooks.Event;
+import com.byteflair.resthooks.api.Event;
 import org.springframework.data.repository.NoRepositoryBean;
 
 import java.util.List;

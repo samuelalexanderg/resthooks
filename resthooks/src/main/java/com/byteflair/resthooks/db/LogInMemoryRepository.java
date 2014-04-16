@@ -1,6 +1,6 @@
 package com.byteflair.resthooks.db;
 
-import com.byteflair.resthooks.Log;
+import com.byteflair.resthooks.api.Log;
 import com.byteflair.resthooks.services.LogRepository;
 
 import java.util.ArrayList;
@@ -27,7 +27,7 @@ public class LogInMemoryRepository implements LogRepository {
 
     @Override
     public List<Log> findAll() {
-        return new ArrayList<Log>(logStore.values());
+        return new ArrayList<>(logStore.values());
     }
 
     @Override

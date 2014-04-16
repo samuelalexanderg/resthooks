@@ -6,7 +6,7 @@
 
 package com.byteflair.resthooks.db.mongo;
 
-import com.byteflair.resthooks.Subscription;
+import com.byteflair.resthooks.api.Subscription;
 import org.springframework.data.repository.CrudRepository;
 
 /**

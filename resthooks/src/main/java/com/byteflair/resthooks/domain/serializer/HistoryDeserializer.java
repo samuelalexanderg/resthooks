@@ -1,6 +1,6 @@
 package com.byteflair.resthooks.domain.serializer;
 
-import com.byteflair.resthooks.LogSpi;
+import com.byteflair.resthooks.api.LogSpi;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.type.TypeReference;

@@ -1,6 +1,6 @@
 package com.byteflair.resthooks.domain;
 
-import com.byteflair.resthooks.Subscription;
+import com.byteflair.resthooks.api.Subscription;
 import org.joda.time.DateTime;
 
 import java.net.URL;
