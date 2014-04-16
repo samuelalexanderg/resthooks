@@ -24,7 +24,7 @@ public class UpdatableResourceComparator {
         final BeanWrapper updateWrapper=PropertyAccessorFactory.forBeanPropertyAccess(update);
         ReflectionUtils.doWithFields(existing.getClass(), new ReflectionUtils.FieldCallback() {
             @Override
-            public void doWith(Field field) throws IllegalArgumentException {
+            public void doWith(Field field) {
                 compare(existingWrapper, updateWrapper, field, result);
             }
         }, new ReflectionUtils.FieldFilter() {
@@ -36,7 +36,7 @@ public class UpdatableResourceComparator {
         return result;
     }
 
-    private static void compare(BeanWrapper existing, BeanWrapper update, Field field, ComparisonVeredict result) throws IllegalArgumentException {
+    private static void compare(BeanWrapper existing, BeanWrapper update, Field field, ComparisonVeredict result) {
         try {
             if(existing.isReadableProperty(field.getName())) {
                 Object resourceValue=existing.getPropertyValue(field.getName());
@@ -56,7 +56,7 @@ public class UpdatableResourceComparator {
             /**
              * Never used
              */
-            LOG.error("Tried to access field {}.{} but it was not readable", existing.getClass().getName(), field.getName());
+            LOG.error("Tried to access field {}.{} but it was not readable. Caused by {}", existing.getClass().getName(), field.getName(), e.getMessage());
         }
     }
 
@@ -80,22 +80,28 @@ public class UpdatableResourceComparator {
                     second=one;
                     LOG.warn("Comparing objects of different class: {} to {}", first.getClass().getName(), second.getClass().getName());
                 } else {
-                    LOG.error("The objects to compare must be of the same class. Unable to compare {} with {}.", one.getClass().getName(), two.getClass().getName());
-                    throw new IllegalArgumentException(String.format("The objects to compare must be of the same class. Unable to compare %s with %s.", one.getClass().getName(), two.getClass().getName()));
+                    LOG.error("The objects to compare must be of the same class. Unable to compare {} with {}", one.getClass().getName(), two.getClass().getName());
+                    throw new IllegalArgumentException(String.format("The objects to compare must be of the same class. Unable to compare %s with %s", one.getClass().getName(), two.getClass().getName()));
                 }
             }
-            if(first instanceof String
-                  || first instanceof Boolean) {
-                areEqual=first.equals(second);
-            } else if(first instanceof Number) {
-                areEqual=((Number) first).doubleValue() == ((Number) second).doubleValue();
-            } else if(first instanceof Date) {
-                areEqual=0 == ((Date) first).compareTo((Date) second);
-            } else if(first instanceof Collection) {
-                areEqual=UpdatableResourceComparator.getDisjointSet((Collection) first, (Collection) second).isEmpty();
-            }
+            areEqual=comparePrimitive(first, second);
         } else if(one == null && two == null) {
             areEqual=true;
+        }
+        return areEqual;
+    }
+
+    private static boolean comparePrimitive(Object first, Object second) {
+        boolean areEqual=false;
+        if(first instanceof String
+              || first instanceof Boolean) {
+            areEqual=first.equals(second);
+        } else if(first instanceof Number) {
+            areEqual=((Number) first).doubleValue() == ((Number) second).doubleValue();
+        } else if(first instanceof Date) {
+            areEqual=0 == ((Date) first).compareTo((Date) second);
+        } else if(first instanceof Collection) {
+            areEqual=UpdatableResourceComparator.getDisjointSet((Collection) first, (Collection) second).isEmpty();
         }
         return areEqual;
     }
