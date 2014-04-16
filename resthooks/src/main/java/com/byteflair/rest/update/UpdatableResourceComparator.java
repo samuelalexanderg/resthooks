@@ -16,37 +16,16 @@ import java.util.*;
  */
 public class UpdatableResourceComparator {
 
-    private static final Logger logger=LoggerFactory.getLogger(UpdatableResourceComparator.class);
+    private static final Logger LOG=LoggerFactory.getLogger(UpdatableResourceComparator.class);
 
     public static ComparisonVeredict compare(final Object existing, final Object update) {
-        final Mutable mutable=new UpdatableResourceComparator().new Mutable();
         final ComparisonVeredict result=new UpdatableResourceComparator().new ComparisonVeredict();
-        final BeanWrapper resourceWrapper=PropertyAccessorFactory.forBeanPropertyAccess(existing);
+        final BeanWrapper existingWrapper=PropertyAccessorFactory.forBeanPropertyAccess(existing);
         final BeanWrapper updateWrapper=PropertyAccessorFactory.forBeanPropertyAccess(update);
         ReflectionUtils.doWithFields(existing.getClass(), new ReflectionUtils.FieldCallback() {
             @Override
             public void doWith(Field field) throws IllegalArgumentException {
-                try {
-                    if(resourceWrapper.isReadableProperty(field.getName())) {
-                        Object resourceValue=resourceWrapper.getPropertyValue(field.getName());
-                        if(field.getAnnotation(JsonIgnore.class) != null) {
-                            /**
-                             * If the property is not being serialized it will be null when deserializing
-                             * I copy the property from existing to update
-                             */
-                            updateWrapper.setPropertyValue(field.getName(), resourceValue);
-                        }
-                        Object updateValue=updateWrapper.getPropertyValue(field.getName());
-                        if(!areEqual(resourceValue, updateValue)) {
-                            result.addField(field, resourceValue, updateValue);
-                        }
-                    }
-                } catch(NotReadablePropertyException e) {
-                    /**
-                     * Never used
-                     */
-                    logger.error("Tried to access field {}.{} but it was not readable", existing.getClass().getName(), field.getName());
-                }
+                compare(existingWrapper, updateWrapper, field, result);
             }
         }, new ReflectionUtils.FieldFilter() {
             @Override
@@ -55,6 +34,30 @@ public class UpdatableResourceComparator {
             }
         });
         return result;
+    }
+
+    private static void compare(BeanWrapper existing, BeanWrapper update, Field field, ComparisonVeredict result) throws IllegalArgumentException {
+        try {
+            if(existing.isReadableProperty(field.getName())) {
+                Object resourceValue=existing.getPropertyValue(field.getName());
+                if(field.getAnnotation(JsonIgnore.class) != null) {
+                    /**
+                     * If the property is not being serialized it will be null when deserializing
+                     * I copy the property from existing to update
+                     */
+                    update.setPropertyValue(field.getName(), resourceValue);
+                }
+                Object updateValue=update.getPropertyValue(field.getName());
+                if(!areEqual(resourceValue, updateValue)) {
+                    result.addField(field, resourceValue, updateValue);
+                }
+            }
+        } catch(NotReadablePropertyException e) {
+            /**
+             * Never used
+             */
+            LOG.error("Tried to access field {}.{} but it was not readable", existing.getClass().getName(), field.getName());
+        }
     }
 
     private static boolean areEqual(final Object one, final Object two) {
@@ -71,13 +74,13 @@ public class UpdatableResourceComparator {
              */
             if(!one.getClass().equals(two.getClass())) {
                 if(one.getClass().isAssignableFrom(two.getClass())) {
-                    logger.warn("Comparing objects of different class: {} to {}", first.getClass().getName(), second.getClass().getName());
+                    LOG.warn("Comparing objects of different class: {} to {}", first.getClass().getName(), second.getClass().getName());
                 } else if(two.getClass().isAssignableFrom(one.getClass())) {
                     first=two;
                     second=one;
-                    logger.warn("Comparing objects of different class: {} to {}", first.getClass().getName(), second.getClass().getName());
+                    LOG.warn("Comparing objects of different class: {} to {}", first.getClass().getName(), second.getClass().getName());
                 } else {
-                    logger.error("The objects to compare must be of the same class. Unable to compare {} with {}.", one.getClass().getName(), two.getClass().getName());
+                    LOG.error("The objects to compare must be of the same class. Unable to compare {} with {}.", one.getClass().getName(), two.getClass().getName());
                     throw new IllegalArgumentException(String.format("The objects to compare must be of the same class. Unable to compare %s with %s.", one.getClass().getName(), two.getClass().getName()));
                 }
             }
@@ -111,11 +114,6 @@ public class UpdatableResourceComparator {
         }
 
         return disjoint;
-    }
-
-    private class Mutable {
-
-        public boolean violationExists=Boolean.FALSE;
     }
 
     public class ComparisonVeredict {
