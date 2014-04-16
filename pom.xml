@@ -1,18 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~ Copyright (c), 2014, Byteflair S.L. Code contributed by Daniel Cerecedo.
+  ~ This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License version 3 as published by the Free Software Foundation.
+  ~ This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GPLv3 for more details.
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xmlns="http://maven.apache.org/POM/4.0.0"
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+
 	<groupId>com.byteflair</groupId>
-	<artifactId>byteflair-resthooks-supplier</artifactId>
+	<artifactId>byteflair-resthooks</artifactId>
 	<version>1.0-SNAPSHOT</version>
-	<dependencies>
-		<dependency>
-			<groupId>com.byteflair</groupId>
-			<artifactId>byteflair-resthooks</artifactId>
-			<version>1.0-SNAPSHOT</version>
-		</dependency>
-	</dependencies>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.test.failure.ignore>true</maven.test.failure.ignore>
+		<sonar.language>java</sonar.language>
+		<spring.framework.version>3.2.6.RELEASE</spring.framework.version>
+		<slf4j.version>1.7.5</slf4j.version>
+		<java.version>1.7</java.version>
+	</properties>
+	<packaging>pom</packaging>
+	<modules>
+		<module>resthooks-core</module>
+		<module>resthooks-mongodb</module>
+		<module>resthooks-supplier</module>
+	</modules>
 	<build>
 		<plugins>
 			<plugin>
