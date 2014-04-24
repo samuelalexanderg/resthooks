@@ -13,13 +13,13 @@ import java.util.List;
 @NoRepositoryBean
 public interface BaseRepository<R, ID extends Serializable> extends Repository<R, ID> {
 
-    public void deleteAll();
+    void deleteAll();
 
-    public void delete(ID id);
+    void delete(ID id);
 
-    public List<R> findAll();
+    List<R> findAll();
 
-    public R findOne(ID id);
+    R findOne(ID id);
 
-    public R save(R resource);
+    R save(R resource);
 }

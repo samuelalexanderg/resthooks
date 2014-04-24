@@ -1,6 +1,5 @@
 package com.byteflair.resthooks.store;
 
-import com.byteflair.resthooks.api.Log;
 import com.byteflair.resthooks.domain.LogImpl;
 import com.byteflair.resthooks.domain.services.LogRepository;
 
@@ -22,13 +21,13 @@ public class LogInMemoryRepository implements LogRepository<LogImpl> {
     }
 
     @Override
-    public void delete(String id) {
-        logStore.remove(id);
+    public List<LogImpl> findAll() {
+        return new ArrayList<>(logStore.values());
     }
 
     @Override
-    public List<LogImpl> findAll() {
-        return new ArrayList<>(logStore.values());
+    public void delete(String id) {
+        logStore.remove(id);
     }
 
     @Override

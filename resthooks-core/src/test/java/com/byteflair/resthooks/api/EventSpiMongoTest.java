@@ -16,5 +16,5 @@ import org.springframework.test.context.web.WebAppConfiguration;
       @ContextConfiguration("classpath:/mongo/context-root.xml"),
       @ContextConfiguration("classpath:context-servlet.xml")
 })
-public class EventSpiMongoTest extends EventSpiTest{
+public class EventSpiMongoTest extends EventSpiTest {
 }

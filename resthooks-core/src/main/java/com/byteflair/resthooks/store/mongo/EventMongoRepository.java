@@ -1,6 +1,5 @@
 package com.byteflair.resthooks.store.mongo;
 
-import com.byteflair.resthooks.domain.EventImpl;
 import com.byteflair.resthooks.domain.services.EventRepository;
 
 /**

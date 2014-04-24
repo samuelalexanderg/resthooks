@@ -1,6 +1,5 @@
 package com.byteflair.resthooks.store.mongo;
 
-import com.byteflair.resthooks.domain.LogImpl;
 import com.byteflair.resthooks.domain.services.LogRepository;
 
 /**

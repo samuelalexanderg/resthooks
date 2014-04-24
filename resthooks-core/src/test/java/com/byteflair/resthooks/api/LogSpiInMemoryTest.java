@@ -16,5 +16,5 @@ import org.springframework.test.context.web.WebAppConfiguration;
       @ContextConfiguration("classpath:/inMemory/context-root.xml"),
       @ContextConfiguration("classpath:context-servlet.xml")
 })
-public class LogSpiInMemoryTest extends LogSpiTest{
+public class LogSpiInMemoryTest extends LogSpiTest {
 }

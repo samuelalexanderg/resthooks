@@ -1,6 +1,5 @@
 package com.byteflair.resthooks.store;
 
-import com.byteflair.resthooks.api.Event;
 import com.byteflair.resthooks.domain.EventImpl;
 import com.byteflair.resthooks.domain.services.EventRepository;
 
@@ -22,13 +21,13 @@ public class EventInMemoryRepository implements EventRepository<EventImpl> {
     }
 
     @Override
-    public void delete(String id) {
-        eventStore.remove(id);
+    public List<EventImpl> findAll() {
+        return new ArrayList<>(eventStore.values());
     }
 
     @Override
-    public List<EventImpl> findAll() {
-        return new ArrayList<>(eventStore.values());
+    public void delete(String id) {
+        eventStore.remove(id);
     }
 
     @Override

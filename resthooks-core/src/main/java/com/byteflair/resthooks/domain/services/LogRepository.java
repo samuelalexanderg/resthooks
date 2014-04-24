@@ -10,9 +10,9 @@ import org.springframework.data.repository.NoRepositoryBean;
 @NoRepositoryBean
 public interface LogRepository<R extends Log> extends BaseRepository<R, String> {
 
-    public void delete(String id);
+    void delete(String id);
 
-    public R findOne(String id);
+    R findOne(String id);
 
-    public R save(R resource);
+    R save(R resource);
 }

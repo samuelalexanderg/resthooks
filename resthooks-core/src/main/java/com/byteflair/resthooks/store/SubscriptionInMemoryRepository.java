@@ -1,6 +1,5 @@
 package com.byteflair.resthooks.store;
 
-import com.byteflair.resthooks.api.Subscription;
 import com.byteflair.resthooks.domain.SubscriptionImpl;
 import com.byteflair.resthooks.domain.services.SubscriptionRepository;
 
@@ -22,13 +21,13 @@ public class SubscriptionInMemoryRepository implements SubscriptionRepository<Su
     }
 
     @Override
-    public void delete(String id) {
-        store.remove(id);
+    public List<SubscriptionImpl> findAll() {
+        return new ArrayList<>(store.values());
     }
 
     @Override
-    public List<SubscriptionImpl> findAll() {
-        return new ArrayList<>(store.values());
+    public void delete(String id) {
+        store.remove(id);
     }
 
     @Override

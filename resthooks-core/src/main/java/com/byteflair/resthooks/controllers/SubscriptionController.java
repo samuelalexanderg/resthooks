@@ -30,7 +30,7 @@ public class SubscriptionController implements SubscriptionSpi {
     SubscriptionService subscriptionService;
 
     @InitBinder
-    private void initValidators(WebDataBinder binder) {
+    public void initValidators(WebDataBinder binder) {
         binder.addValidators(new SubscriptionValidator());
     }
 
