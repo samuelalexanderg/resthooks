@@ -2,6 +2,8 @@ package com.byteflair.resthooks.api;
 
 import com.byteflair.resthooks.domain.serializer.DateTimeDeserializer;
 import com.byteflair.resthooks.domain.serializer.DateTimeSerializer;
+import com.byteflair.resthooks.domain.serializer.EventRefDeserializer;
+import com.byteflair.resthooks.domain.serializer.EventRefSerializer;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -18,6 +20,10 @@ public interface Log {
     LogLevel getLevel();
 
     String getMessage();
+
+    @JsonSerialize(using=EventRefSerializer.class)
+    @JsonDeserialize(using=EventRefDeserializer.class)
+    String getEvent();
 
     @JsonSerialize(using=DateTimeSerializer.class)
     @JsonDeserialize(using=DateTimeDeserializer.class)

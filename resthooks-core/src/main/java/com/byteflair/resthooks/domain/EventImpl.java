@@ -34,22 +34,11 @@ public class EventImpl implements Event {
         this.createdAt=new DateTime();
     }
 
-    public EventImpl(String id, String type, EventStatus status, DateTime createdAt) {
-        this.id=id;
-        this.type=type;
-        this.status=status;
-        this.createdAt=createdAt;
-    }
-
     public EventImpl(String id, String type, EventStatus status, List<String> history) {
         this(id, type, status);
         this.history=history;
     }
 
-    public EventImpl(String id, String type, EventStatus status, List<String> history, DateTime createdAt) {
-        this(id, type, status, createdAt);
-        this.history=history;
-    }
 
     public String getId() {
         return id;
@@ -92,9 +81,48 @@ public class EventImpl implements Event {
     }
 
     @Override
+    public int hashCode() {
+        int result=id != null ? id.hashCode() : 0;
+        result=31*result+(type != null ? type.hashCode() : 0);
+        result=31*result+(status != null ? status.hashCode() : 0);
+        result=31*result+(history != null ? history.hashCode() : 0);
+        result=31*result+(createdAt != null ? createdAt.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if(this == o) {
+            return true;
+        }
+        if(!(o instanceof EventImpl)) {
+            return false;
+        }
+
+        EventImpl event=(EventImpl) o;
+
+        if(createdAt != null ? !createdAt.equals(event.createdAt) : event.createdAt != null) {
+            return false;
+        }
+        if(history != null ? !history.equals(event.history) : event.history != null) {
+            return false;
+        }
+        if(id != null ? !id.equals(event.id) : event.id != null) {
+            return false;
+        }
+        if(status != event.status) {
+            return false;
+        }
+        if(type != null ? !type.equals(event.type) : event.type != null) {
+            return false;
+        }
+
+        return true;
+    }
+
+    @Override
     public String toString() {
         return "EventImpl{"+
-              "formatter="+formatter+
               ", id="+id+
               ", type='"+type+'\''+
               ", status="+status+

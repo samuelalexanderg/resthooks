@@ -21,6 +21,7 @@ import org.springframework.util.ReflectionUtils;
 
 import java.math.BigInteger;
 import java.security.SecureRandom;
+import java.util.Map;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
@@ -46,10 +47,9 @@ public class EventTest {
     private final static Logger LOGGER=LoggerFactory.getLogger(EventTest.class);
 
     private Event createEvent() {
-        EventImpl event=new EventImpl();
-        event.setId(new BigInteger(25, secureRandom).toString(32));
-        event.setStatus(EventStatus.values()[secureRandom.nextInt(EventStatus.values().length)]);
-        event.setType(new BigInteger(25, secureRandom).toString(32));
+        EventImpl event=new EventImpl(new BigInteger(25, secureRandom).toString(32),
+              new BigInteger(25, secureRandom).toString(32),
+              EventStatus.values()[secureRandom.nextInt(EventStatus.values().length)]);
         for(int i=0; i<5; i++) {
             event.addHistory(new BigInteger(25, secureRandom).toString(32));
         }
@@ -110,6 +110,29 @@ public class EventTest {
         }
 
         LOGGER.info("thatProperlyDeserializesFromJson deserialized from\n{}\ninto...\n{}", json, otherEvent);
+    }
+
+    @Test
+    public void thatDeserializationDoesNotFailOnUnknownProperties() throws Exception {
+
+        Event event=createEvent();
+        ObjectMapper mapper=new ObjectMapper();
+        Map<String, Object> data=mapper.readValue(mapper.writeValueAsString(event), Map.class);
+        data.put("unknownProperty", "some value");
+
+        String json=mapper.writeValueAsString(data);
+
+        Event otherEvent=mapper.readValue(json, EventImpl.class);
+        /**
+         * Must include all fields...
+         */
+        Assert.assertEquals(otherEvent.getId(), event.getId());
+        Assert.assertEquals(otherEvent.getType(), event.getType());
+        Assert.assertEquals(otherEvent.getStatus(), event.getStatus());
+        Assert.assertTrue(otherEvent.getCreatedAt().isEqual(event.getCreatedAt()));
+
+        LOGGER.info("thatDeserializationDoesNotFailOnUnknownProperties deserialized:\n{}\ninto...\n{}", json, otherEvent);
+
     }
 
 }
