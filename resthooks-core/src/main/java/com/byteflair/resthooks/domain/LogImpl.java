@@ -12,8 +12,6 @@ import org.joda.time.format.ISODateTimeFormat;
  */
 public class LogImpl implements Log {
 
-    private final DateTimeFormatter formatter=ISODateTimeFormat.dateTime().withZoneUTC();
-
     private String id;
     private LogLevel level;
     private String message;
@@ -78,6 +76,7 @@ public class LogImpl implements Log {
 
     @Override
     public String toString() {
+        DateTimeFormatter formatter=ISODateTimeFormat.dateTime().withZoneUTC();
         return "LogImpl{"+
               "id="+id+
               ", level="+level+

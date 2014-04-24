@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	   xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xsi:schemaLocation="
+          http://www.springframework.org/schema/data/mongo
+          http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd
+          http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+          http://www.springframework.org/schema/context
+          http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:property-placeholder location="classpath:/mongo/mongo.properties"/>
+
+	<mongo:repositories base-package="com.byteflair.resthooks.store.mongo"/>
+
+	<mongo:mongo host="${mongo.hostname}" port="${mongo.port}">
+		<mongo:options connections-per-host="8"
+					   threads-allowed-to-block-for-connection-multiplier="4"
+					   connect-timeout="15000"
+					   max-wait-time="1500"
+					   auto-connect-retry="true"
+					   socket-keep-alive="true"
+					   socket-timeout="60000"
+					   slave-ok="true"
+					   write-number="1"
+					   write-timeout="0"
+					   write-fsync="false"/>
+	</mongo:mongo>
+
+	<mongo:db-factory dbname="${mongo.dbname}" mongo-ref="mongo"/>
+	<bean id="mongoTypeMapper" class="org.springframework.data.mongodb.core.convert.DefaultMongoTypeMapper">
+		<constructor-arg name="typeKey">
+			<null/>
+		</constructor-arg>
+	</bean>
+	<bean id="mongoMappingContext" class="org.springframework.data.mongodb.core.mapping.MongoMappingContext"/>
+	<bean id="mongoConverter" class="org.springframework.data.mongodb.core.convert.MappingMongoConverter">
+		<constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>
+		<constructor-arg name="mappingContext" ref="mongoMappingContext"/>
+		<property name="typeMapper" ref="mongoTypeMapper"></property>
+	</bean>
+	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+		<constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>
+		<constructor-arg name="mongoConverter" ref="mongoConverter"/>
+	</bean>
+</beans>
