@@ -1,17 +1,12 @@
 package com.byteflair.rest.views;
 
-import org.springframework.beans.BeansException;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
-import org.springframework.context.expression.BeanFactoryResolver;
 import org.springframework.core.MethodParameter;
-import org.springframework.expression.BeanResolver;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
-class ViewInjectingReturnValueHandler implements HandlerMethodReturnValueHandler, ApplicationContextAware {
+class ViewInjectingReturnValueHandler implements HandlerMethodReturnValueHandler {
 
     private final HandlerMethodReturnValueHandler delegate;
 
@@ -48,8 +43,4 @@ class ViewInjectingReturnValueHandler implements HandlerMethodReturnValueHandler
         return response;
     }
 
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        BeanResolver resolver=new BeanFactoryResolver(applicationContext);
-    }
 }

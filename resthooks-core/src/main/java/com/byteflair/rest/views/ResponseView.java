@@ -8,7 +8,7 @@ public @interface ResponseView {
 
     public Class<? extends View> value() default View.class;
 
-    public String[] names() default {};
+    public String[] names() default { };
 
-    public Class<? extends View>[] views() default {};
+    public Class<? extends View>[] views() default { };
 }

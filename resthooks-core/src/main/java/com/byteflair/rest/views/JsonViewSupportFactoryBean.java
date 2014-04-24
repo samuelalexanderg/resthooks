@@ -32,19 +32,4 @@ public class JsonViewSupportFactoryBean implements InitializingBean {
         }
         adapter.setCustomReturnValueHandlers(customHandlers);
     }
-
-    private void decorateHandlers(List<HandlerMethodReturnValueHandler> handlers) {
-        List<HandlerMethodReturnValueHandler> customHandlers=new ArrayList<>();
-        for(HandlerMethodReturnValueHandler handler : handlers) {
-            if(handler instanceof HttpEntityMethodProcessor) {
-                ViewInjectingReturnValueHandler decorator=new ViewInjectingReturnValueHandler(handler);
-                int index=handlers.indexOf(handler);
-                handlers.set(index, decorator);
-
-                LOGGER.debug("JsonView decorator support wired up");
-                break;
-            }
-        }
-    }
-
 }

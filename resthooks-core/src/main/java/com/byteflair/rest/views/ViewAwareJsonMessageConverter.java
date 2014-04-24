@@ -18,7 +18,7 @@ public class ViewAwareJsonMessageConverter extends MappingJackson2HttpMessageCon
     }
 
     @Override
-    protected void writeInternal(Object object, HttpOutputMessage outputMessage) throws IOException, HttpMessageNotWritableException {
+    protected void writeInternal(Object object, HttpOutputMessage outputMessage) throws IOException {
         if(object instanceof DataView) {
             writeView((DataView) object, outputMessage);
         } else {
