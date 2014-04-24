@@ -1,7 +1,6 @@
 package com.byteflair.resthooks.domain.serializer;
 
 import com.byteflair.resthooks.api.LogSpi;
-import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationContext;
@@ -37,7 +36,7 @@ public class HistoryDeserializer extends JsonDeserializer<List<String>> {
                 history.add(id);
             } else {
                 LOGGER.error(String.format("The hypermedia supplied %s does not match %s", hypermedium, this.pattern.pattern().toString()));
-                throw new JsonParseException(String.format("The hypermedia supplied %s does not match %s", hypermedium, this.pattern.pattern().toString()), jsonParser.getCurrentLocation());
+                throw new IOException(String.format("The hypermedia supplied %s does not match %s", hypermedium, this.pattern.pattern().toString()));
             }
         }
         return history;
