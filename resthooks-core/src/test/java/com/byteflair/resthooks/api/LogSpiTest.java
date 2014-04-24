@@ -10,14 +10,9 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.ContextHierarchy;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -36,13 +31,7 @@ import java.util.List;
  * Created by dcerecedo on 1/26/14.
  */
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@WebAppConfiguration
-@ContextHierarchy({
-      @ContextConfiguration("classpath:context-root.xml"),
-      @ContextConfiguration("classpath:context-servlet.xml")
-})
-public class LogSpiTest {
+public abstract class LogSpiTest {
 
     private final SecureRandom secureRandom=new SecureRandom();
     private final List<Log> testLogs=new ArrayList<>();
@@ -118,7 +107,7 @@ public class LogSpiTest {
 
     @Test
     public void thatThrowsNotFoundException() throws Exception {
-        String id=logRepository.findAll().get(0).getId();
+        String id=((Log) logRepository.findAll().get(0)).getId();
         logRepository.delete(id);
         ResultActions result=this.mockMvc.perform(MockMvcRequestBuilders.get("/logs/"+id).accept(new MediaType("application", "json")));
         result.andExpect(MockMvcResultMatchers.status().isNotFound())

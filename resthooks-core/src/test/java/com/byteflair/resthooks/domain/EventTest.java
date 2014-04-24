@@ -36,7 +36,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextHierarchy({
-      @ContextConfiguration("classpath:context-root.xml"),
+      @ContextConfiguration("classpath:/inMemory/context-root.xml"),
       @ContextConfiguration("classpath:context-servlet.xml")
 })
 public class EventTest {

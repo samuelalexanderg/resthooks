@@ -1,4 +1,0 @@
-resthooks
-=========
-
-A Resthooks implementation

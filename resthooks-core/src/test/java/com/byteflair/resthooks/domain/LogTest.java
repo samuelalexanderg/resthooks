@@ -19,6 +19,7 @@ import java.util.Map;
 /**
  * Created by dcerecedo on 1/24/14.
  */
+
 public class LogTest {
 
     private final static Logger LOGGER=LoggerFactory.getLogger(LogTest.class);

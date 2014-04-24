@@ -10,15 +10,10 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.ContextHierarchy;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -37,14 +32,8 @@ import java.util.List;
 /**
  * Created by dcerecedo on 1/24/14.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@WebAppConfiguration
-@ContextHierarchy({
-      @ContextConfiguration("classpath:context-root.xml"),
-      @ContextConfiguration("classpath:context-servlet.xml")
-})
 
-public class EventSpiTest {
+public abstract class EventSpiTest {
 
     private final static Logger LOGGER=LoggerFactory.getLogger(EventSpiTest.class);
     private final SecureRandom secureRandom=new SecureRandom();

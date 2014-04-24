@@ -2,24 +2,17 @@ package com.byteflair.resthooks.domain.services;
 
 import com.byteflair.resthooks.api.Log;
 import org.springframework.data.repository.NoRepositoryBean;
-import org.springframework.data.repository.Repository;
-
-import java.util.List;
 
 /**
  * Created by dcerecedo on 1/26/14.
  */
 
 @NoRepositoryBean
-public interface LogRepository extends Repository<Log, String> {
+public interface LogRepository<R extends Log> extends BaseRepository<R, String> {
 
-    void deleteAll();
+    public void delete(String id);
 
-    void delete(String id);
+    public R findOne(String id);
 
-    List<Log> findAll();
-
-    Log findOne(String id);
-
-    Log save(Log log);
+    public R save(R resource);
 }

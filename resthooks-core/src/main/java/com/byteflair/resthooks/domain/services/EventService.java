@@ -4,7 +4,7 @@ import com.byteflair.resthooks.api.Event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by dcerecedo on 1/25/14.
@@ -16,7 +16,7 @@ public class EventService {
     @Autowired
     EventRepository eventRepository;
 
-    public Collection<? extends Event> getAll() {
+    public List<Event> getAll() {
         return eventRepository.findAll();
     }
 

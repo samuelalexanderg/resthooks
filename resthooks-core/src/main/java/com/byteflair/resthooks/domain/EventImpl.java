@@ -5,6 +5,7 @@ import com.byteflair.resthooks.api.EventStatus;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
+import org.springframework.data.annotation.Transient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
  */
 public class EventImpl implements Event {
 
+    @Transient
     private final DateTimeFormatter formatter=ISODateTimeFormat.dateTime().withZoneUTC();
 
     private String id;

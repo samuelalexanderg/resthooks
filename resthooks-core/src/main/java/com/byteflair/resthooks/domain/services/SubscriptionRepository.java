@@ -3,20 +3,16 @@ package com.byteflair.resthooks.domain.services;
 import com.byteflair.resthooks.api.Subscription;
 import org.springframework.data.repository.NoRepositoryBean;
 
-import java.util.List;
-
 /**
  * Created by dcerecedo on 1/25/14.
  */
 
 @NoRepositoryBean
-public interface SubscriptionRepository extends BaseRepository<Subscription, String> {
+public interface SubscriptionRepository<R extends Subscription> extends BaseRepository<R, String> {
 
     public void delete(String id);
 
-    public List<Subscription> findAll();
+    public R findOne(String id);
 
-    public Subscription findOne(String id);
-
-    public Subscription save(Subscription subscription);
+    public R save(R resource);
 }
