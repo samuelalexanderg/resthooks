@@ -19,7 +19,7 @@ public class SubscriptionImpl implements Subscription {
     private String id;
     private URL callback;
     private String topic;
-    private int maximunRetries=10;
+    private Integer maximunRetries=10;
     private DateTime createdAt;
     private DateTime updatedAt;
 
@@ -32,7 +32,7 @@ public class SubscriptionImpl implements Subscription {
         this.topic=topic;
     }
 
-    public SubscriptionImpl(String id, URL callback, String topic, int retries) {
+    public SubscriptionImpl(String id, URL callback, String topic, Integer retries) {
         this.id=id;
         this.callback=callback;
         this.topic=topic;
@@ -59,7 +59,7 @@ public class SubscriptionImpl implements Subscription {
         this.callback=callback;
     }
 
-    public int getMaximunRetries() {
+    public Integer getMaximunRetries() {
         return maximunRetries;
     }
 
@@ -79,7 +79,7 @@ public class SubscriptionImpl implements Subscription {
         this.updatedAt=updatedAt;
     }
 
-    public void setMaximunRetries(int maximunRetries) {
+    public void setMaximunRetries(Integer maximunRetries) {
         this.maximunRetries=maximunRetries;
     }
 
@@ -92,7 +92,7 @@ public class SubscriptionImpl implements Subscription {
         int result=id != null ? id.hashCode() : 0;
         result=31*result+(callback != null ? callback.hashCode() : 0);
         result=31*result+(topic != null ? topic.hashCode() : 0);
-        result=31*result+maximunRetries;
+        result=31*result+(maximunRetries != null ? maximunRetries.hashCode() : 0);
         result=31*result+(createdAt != null ? createdAt.hashCode() : 0);
         result=31*result+(updatedAt != null ? updatedAt.hashCode() : 0);
         return result;
@@ -109,9 +109,6 @@ public class SubscriptionImpl implements Subscription {
 
         SubscriptionImpl that=(SubscriptionImpl) o;
 
-        if(maximunRetries != that.maximunRetries) {
-            return false;
-        }
         if(callback != null ? !callback.equals(that.callback) : that.callback != null) {
             return false;
         }
@@ -119,6 +116,9 @@ public class SubscriptionImpl implements Subscription {
             return false;
         }
         if(id != null ? !id.equals(that.id) : that.id != null) {
+            return false;
+        }
+        if(maximunRetries != null ? !maximunRetries.equals(that.maximunRetries) : that.maximunRetries != null) {
             return false;
         }
         if(topic != null ? !topic.equals(that.topic) : that.topic != null) {
